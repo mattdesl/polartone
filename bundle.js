@@ -1,2 +1,2798 @@
-!function e(t,n,r){function i(s,a){if(!n[s]){if(!t[s]){var c="function"==typeof require&&require;if(!a&&c)return c(s,!0);if(o)return o(s,!0);var u=new Error("Cannot find module '"+s+"'");throw u.code="MODULE_NOT_FOUND",u}var l=n[s]={exports:{}};t[s][0].call(l.exports,function(e){var n=t[s][1][e];return i(n?n:e)},l,l.exports,e,t,n,r)}return n[s].exports}for(var o="function"==typeof require&&require,s=0;s<r.length;s++)i(r[s]);return i}({1:[function(e,t,n){(function(t){"use strict";function n(e){L&&L.pause(),C&&C.parentNode.removeChild(C),A.stop(),A.removeAllListeners("tick"),e?"string"==typeof e&&(e={url:e}):e=b[Math.floor(Math.random()*b.length)];var t=s();y({client_id:"b95f61a90da961736c03f659c03cb0cc",song:a(t||e.url),dark:!0,getFonts:!0},function(t,n,i,o){if(t)throw t;C=o,r(n,e)})}function r(e,t){var n=new Audio;n.crossOrigin="Anonymous",n.addEventListener("canplay",h(function(){t.seek&&(n.currentTime=t.seek),i(n,t),n.play()})),n.src=e,L=n}function i(e,t){function n(e){s+=e/1e3;var n=s/p;if(n>1)return A.stop();var i=r.waveform(),u=i.length;a.identity(),a.translate(t.position||[0,3.5,0]),a.lookAt([0,0,0]),a.update(),k.save(),k.scale(o,o);var l=1-n,v=s,g=t.alpha||.25;k.strokeStyle="rgba(0, 0, 0, "+g+")",k.lineWidth=1,k.lineJoin="round",k.beginPath();for(var b=h.length-1;b>=0;b--){var x=h[b];k.lineTo(x[0],x[1])}k.stroke(),k.restore();for(var b=0;u>b;b++){var _=b/(u-1),j=d(v+y,v,_);f[0]=Math.cos(j)*l,f[2]=Math.sin(j)*l;var C=i[b]/128,L=C*w/2,E=[f[0],f[1]+L,f[2]],M=a.project(E),O=c(M,2),q=O[0],T=O[1];h.length>m&&h.shift(),h.push([q,T])}}var r=u(e,_,{audible:!0,stereo:!1}),i=[window.innerWidth,window.innerHeight],o=window.devicePixelRatio;g(j,window,o)();var s=0,a=l({fov:Math.PI/4,near:.01,far:100,viewport:[0,0].concat(i)}),p=e.duration,f=[0,0,0],h=[],m=v(t.capacity,1e3),y=v(t.distance,.25),w=v(t.extent,.5);A.on("tick",n).start()}function o(){console.log("%cspins","font-weight: bold; padding: 3px; background: #ededed;"),console.log("Reload the page for another preset.\n    \nTo change tracks and settings:\n\n  load()    // loads a random track\n  load(url) // loads a SoundCloud url\n  load(opt) // loads with full options\n  \n  options:\n    url        the URL to load\n    capacity   number of line segments per tick\n    distance   radial distance along circle to draw each tick\n    position   camera [x, y, z]\n    extent     amount to extend away from line center\n    alpha      line opacity\n    seek       seconds to jump into the song at\n\n\nYou can also specify a short URL in the query and it will take precedence.\n  http://mattdesl.github.io/spins?url=roman-mars/99-invisible-162-mystery-house\n")}function s(){return m.parse(window.location.search).url}function a(e){return e?(/https?:/i.test(e)||(e=w("https://soundcloud.com/",e)),e):null}var c=function(){function e(e,t){var n=[],r=!0,i=!1,o=void 0;try{for(var s,a=e[Symbol.iterator]();!(r=(s=a.next()).done)&&(n.push(s.value),!t||n.length!==t);r=!0);}catch(c){i=!0,o=c}finally{try{!r&&a["return"]&&a["return"]()}finally{if(i)throw o}}return n}return function(t,n){if(Array.isArray(t))return t;if(Symbol.iterator in Object(t))return e(t,n);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),u=e("web-audio-analyser"),l=e("perspective-camera"),p=e("raf-loop"),f=e("get-canvas-context"),d=e("lerp"),h=e("once"),v=e("defined"),g=e("canvas-fit"),m=e("query-string"),y=e("soundcloud-badge"),w=e("url-join"),b=e("./presets"),x=window.AudioContext||window.webkitAudioContext,_=new x,k=f("2d"),j=k.canvas;document.body.appendChild(j),document.body.style.overflow="hidden";var A=p(),C=void 0,L=void 0;n(),o(),t.load=n}).call(this,"undefined"!=typeof global?global:"undefined"!=typeof self?self:"undefined"!=typeof window?window:{})},{"./presets":62,"canvas-fit":8,defined:10,"get-canvas-context":11,lerp:12,once:14,"perspective-camera":15,"query-string":45,"raf-loop":47,"soundcloud-badge":52,"url-join":60,"web-audio-analyser":61}],2:[function(e,t,n){},{}],3:[function(e,t,n){function r(){this._events=this._events||{},this._maxListeners=this._maxListeners||void 0}function i(e){return"function"==typeof e}function o(e){return"number"==typeof e}function s(e){return"object"==typeof e&&null!==e}function a(e){return void 0===e}t.exports=r,r.EventEmitter=r,r.prototype._events=void 0,r.prototype._maxListeners=void 0,r.defaultMaxListeners=10,r.prototype.setMaxListeners=function(e){if(!o(e)||0>e||isNaN(e))throw TypeError("n must be a positive number");return this._maxListeners=e,this},r.prototype.emit=function(e){var t,n,r,o,c,u;if(this._events||(this._events={}),"error"===e&&(!this._events.error||s(this._events.error)&&!this._events.error.length)){if(t=arguments[1],t instanceof Error)throw t;throw TypeError('Uncaught, unspecified "error" event.')}if(n=this._events[e],a(n))return!1;if(i(n))switch(arguments.length){case 1:n.call(this);break;case 2:n.call(this,arguments[1]);break;case 3:n.call(this,arguments[1],arguments[2]);break;default:for(r=arguments.length,o=new Array(r-1),c=1;r>c;c++)o[c-1]=arguments[c];n.apply(this,o)}else if(s(n)){for(r=arguments.length,o=new Array(r-1),c=1;r>c;c++)o[c-1]=arguments[c];for(u=n.slice(),r=u.length,c=0;r>c;c++)u[c].apply(this,o)}return!0},r.prototype.addListener=function(e,t){var n;if(!i(t))throw TypeError("listener must be a function");if(this._events||(this._events={}),this._events.newListener&&this.emit("newListener",e,i(t.listener)?t.listener:t),this._events[e]?s(this._events[e])?this._events[e].push(t):this._events[e]=[this._events[e],t]:this._events[e]=t,s(this._events[e])&&!this._events[e].warned){var n;n=a(this._maxListeners)?r.defaultMaxListeners:this._maxListeners,n&&n>0&&this._events[e].length>n&&(this._events[e].warned=!0,console.error("(node) warning: possible EventEmitter memory leak detected. %d listeners added. Use emitter.setMaxListeners() to increase limit.",this._events[e].length),"function"==typeof console.trace&&console.trace())}return this},r.prototype.on=r.prototype.addListener,r.prototype.once=function(e,t){function n(){this.removeListener(e,n),r||(r=!0,t.apply(this,arguments))}if(!i(t))throw TypeError("listener must be a function");var r=!1;return n.listener=t,this.on(e,n),this},r.prototype.removeListener=function(e,t){var n,r,o,a;if(!i(t))throw TypeError("listener must be a function");if(!this._events||!this._events[e])return this;if(n=this._events[e],o=n.length,r=-1,n===t||i(n.listener)&&n.listener===t)delete this._events[e],this._events.removeListener&&this.emit("removeListener",e,t);else if(s(n)){for(a=o;a-->0;)if(n[a]===t||n[a].listener&&n[a].listener===t){r=a;break}if(0>r)return this;1===n.length?(n.length=0,delete this._events[e]):n.splice(r,1),this._events.removeListener&&this.emit("removeListener",e,t)}return this},r.prototype.removeAllListeners=function(e){var t,n;if(!this._events)return this;if(!this._events.removeListener)return 0===arguments.length?this._events={}:this._events[e]&&delete this._events[e],this;if(0===arguments.length){for(t in this._events)"removeListener"!==t&&this.removeAllListeners(t);return this.removeAllListeners("removeListener"),this._events={},this}if(n=this._events[e],i(n))this.removeListener(e,n);else for(;n.length;)this.removeListener(e,n[n.length-1]);return delete this._events[e],this},r.prototype.listeners=function(e){var t;return t=this._events&&this._events[e]?i(this._events[e])?[this._events[e]]:this._events[e].slice():[]},r.listenerCount=function(e,t){var n;return n=e._events&&e._events[t]?i(e._events[t])?1:e._events[t].length:0}},{}],4:[function(e,t,n){function r(){l=!1,a.length?u=a.concat(u):p=-1,u.length&&i()}function i(){if(!l){var e=setTimeout(r);l=!0;for(var t=u.length;t;){for(a=u,u=[];++p<t;)a&&a[p].run();p=-1,t=u.length}a=null,l=!1,clearTimeout(e)}}function o(e,t){this.fun=e,this.array=t}function s(){}var a,c=t.exports={},u=[],l=!1,p=-1;c.nextTick=function(e){var t=new Array(arguments.length-1);if(arguments.length>1)for(var n=1;n<arguments.length;n++)t[n-1]=arguments[n];u.push(new o(e,t)),1!==u.length||l||setTimeout(i,0)},o.prototype.run=function(){this.fun.apply(null,this.array)},c.title="browser",c.browser=!0,c.env={},c.argv=[],c.version="",c.versions={},c.on=s,c.addListener=s,c.once=s,c.off=s,c.removeListener=s,c.removeAllListeners=s,c.emit=s,c.binding=function(e){throw new Error("process.binding is not supported")},c.cwd=function(){return"/"},c.chdir=function(e){throw new Error("process.chdir is not supported")},c.umask=function(){return 0}},{}],5:[function(e,t,n){"use strict";function r(e,t){return Object.prototype.hasOwnProperty.call(e,t)}t.exports=function(e,t,n,o){t=t||"&",n=n||"=";var s={};if("string"!=typeof e||0===e.length)return s;var a=/\+/g;e=e.split(t);var c=1e3;o&&"number"==typeof o.maxKeys&&(c=o.maxKeys);var u=e.length;c>0&&u>c&&(u=c);for(var l=0;u>l;++l){var p,f,d,h,v=e[l].replace(a,"%20"),g=v.indexOf(n);g>=0?(p=v.substr(0,g),f=v.substr(g+1)):(p=v,f=""),d=decodeURIComponent(p),h=decodeURIComponent(f),r(s,d)?i(s[d])?s[d].push(h):s[d]=[s[d],h]:s[d]=h}return s};var i=Array.isArray||function(e){return"[object Array]"===Object.prototype.toString.call(e)}},{}],6:[function(e,t,n){"use strict";function r(e,t){if(e.map)return e.map(t);for(var n=[],r=0;r<e.length;r++)n.push(t(e[r],r));return n}var i=function(e){switch(typeof e){case"string":return e;case"boolean":return e?"true":"false";case"number":return isFinite(e)?e:"";default:return""}};t.exports=function(e,t,n,a){return t=t||"&",n=n||"=",null===e&&(e=void 0),"object"==typeof e?r(s(e),function(s){var a=encodeURIComponent(i(s))+n;return o(e[s])?r(e[s],function(e){return a+encodeURIComponent(i(e))}).join(t):a+encodeURIComponent(i(e[s]))}).join(t):a?encodeURIComponent(i(a))+n+encodeURIComponent(i(e)):""};var o=Array.isArray||function(e){return"[object Array]"===Object.prototype.toString.call(e)},s=Object.keys||function(e){var t=[];for(var n in e)Object.prototype.hasOwnProperty.call(e,n)&&t.push(n);return t}},{}],7:[function(e,t,n){"use strict";n.decode=n.parse=e("./decode"),n.encode=n.stringify=e("./encode")},{"./decode":5,"./encode":6}],8:[function(e,t,n){function r(e,t,n){function r(){var t=r.parent||e.parentNode;if("function"==typeof t)var n=t(o)||o,a=n[0],c=n[1];else if(t&&t!==document.body)var u=i(t),a=0|u[0],c=0|u[1];else var a=window.innerWidth,c=window.innerHeight;return s?(e.setAttribute("width",a*r.scale+"px"),e.setAttribute("height",c*r.scale+"px")):(e.width=a*r.scale,e.height=c*r.scale),e.style.width=a+"px",e.style.height=c+"px",r}var s="SVG"===e.nodeName.toUpperCase();return e.style.position=e.style.position||"absolute",e.style.top=0,e.style.left=0,r.scale=parseFloat(n||1),r.parent=t,r()}var i=e("element-size");t.exports=r;var o=new Float32Array(2)},{"element-size":9}],9:[function(e,t,n){function r(e){if(e===window||e===document.body)return[window.innerWidth,window.innerHeight];if(!e.parentNode){var t=!0;document.body.appendChild(e)}var n=e.getBoundingClientRect(),r=getComputedStyle(e),o=(0|n.height)+i(r.getPropertyValue("margin-top"))+i(r.getPropertyValue("margin-bottom")),s=(0|n.width)+i(r.getPropertyValue("margin-left"))+i(r.getPropertyValue("margin-right"));return t&&document.body.removeChild(e),[s,o]}function i(e){return parseFloat(e)||0}t.exports=r},{}],10:[function(e,t,n){t.exports=function(){for(var e=0;e<arguments.length;e++)if(void 0!==arguments[e])return arguments[e]}},{}],11:[function(e,t,n){function r(e,t){if("string"!=typeof e)throw new TypeError("must specify type string");if("undefined"==typeof document)return null;t=t||{};var n=t.canvas||document.createElement("canvas");"number"==typeof t.width&&(n.width=t.width),"number"==typeof t.height&&(n.height=t.height);var r,i=t;try{var o=[e];0===e.indexOf("webgl")&&o.push("experimental-"+e);for(var s=0;s<o.length;s++)if(r=n.getContext(o[s],i))return r}catch(a){r=null}return r||null}t.exports=r},{}],12:[function(e,t,n){function r(e,t,n){return e*(1-n)+t*n}t.exports=r},{}],13:[function(e,t,n){function r(e,t){function n(){for(var t=new Array(arguments.length),n=0;n<t.length;n++)t[n]=arguments[n];var r=e.apply(this,t),i=t[t.length-1];return"function"==typeof r&&r!==i&&Object.keys(i).forEach(function(e){r[e]=i[e]}),r}if(e&&t)return r(e)(t);if("function"!=typeof e)throw new TypeError("need wrapper function");return Object.keys(e).forEach(function(t){n[t]=e[t]}),n}t.exports=r},{}],14:[function(e,t,n){function r(e){var t=function(){return t.called?t.value:(t.called=!0,t.value=e.apply(this,arguments))};return t.called=!1,t}var i=e("wrappy");t.exports=i(r),r.proto=r(function(){Object.defineProperty(Function.prototype,"once",{value:function(){return r(this)},configurable:!0})})},{wrappy:13}],15:[function(e,t,n){t.exports=e("./lib/camera-perspective")},{"./lib/camera-perspective":18}],16:[function(e,t,n){var r=e("object-assign"),i=e("ray-3d"),o=e("camera-project"),s=e("camera-unproject"),a=e("./camera-look-at"),c=e("camera-picking-ray"),u=e("gl-vec3/add"),l=e("gl-mat4/multiply"),p=e("gl-mat4/invert"),f=e("gl-mat4/identity"),d=e("gl-vec3/set");t.exports=function(e){function t(){l(w.projView,w.projection,w.view);var e=p(w.invProjView,w.projView);if(!e)throw new Error("camera projection * view is non-invertible")}function n(e){return a(w.direction,w.up,w.position,e),w}function h(){return d(w.position,0,0,0),d(w.direction,0,0,-1),d(w.up,0,1,0),f(w.view),f(w.projection),f(w.projView),f(w.invProjView),w}function v(e){return u(w.position,w.position,e),w}function g(e){var t=new i;return c(t.origin,t.direction,e,w.viewport,w.invProjView),t}function m(e){return o([],e,w.viewport,w.projView)}function y(e){return s([],e,w.viewport,w.invProjView)}e=e||{};var w={projection:f([]),view:f([]),position:e.position||[0,0,0],direction:e.direction||[0,0,-1],up:e.up||[0,1,0],viewport:e.viewport||[-1,-1,1,1],projView:f([]),invProjView:f([])};return r(w,{translate:v,identity:h,lookAt:n,createPickingRay:g,update:t,project:m,unproject:y})}},{"./camera-look-at":17,"camera-picking-ray":19,"camera-project":20,"camera-unproject":23,"gl-mat4/identity":25,"gl-mat4/invert":26,"gl-mat4/multiply":28,"gl-vec3/add":30,"gl-vec3/set":37,"object-assign":40,"ray-3d":41}],17:[function(e,t,n){var r=e("gl-vec3/cross"),i=e("gl-vec3/subtract"),o=e("gl-vec3/normalize"),s=e("gl-vec3/copy"),a=e("gl-vec3/dot"),c=e("gl-vec3/scale"),u=[0,0,0],l=1e-9;t.exports=function(e,t,n,p){i(u,p,n),o(u,u);var f=0===u[0]&&0===u[1]&&0===u[2];if(!f){var d=a(u,t);Math.abs(d-1)<l?c(t,e,-1):Math.abs(d+1)<l&&s(t,e),s(e,u),r(u,e,t),o(u,u),r(t,u,e),o(t,t)}}},{"gl-vec3/copy":31,"gl-vec3/cross":32,"gl-vec3/dot":33,"gl-vec3/normalize":34,"gl-vec3/scale":35,"gl-vec3/subtract":39}],18:[function(e,t,n){var r=e("./camera-base"),i=e("object-assign"),o=e("defined"),s=e("gl-mat4/perspective"),a=e("gl-mat4/lookAt"),c=e("gl-vec3/add");t.exports=function(e){function t(){var e=n.viewport[2]/n.viewport[3];return s(n.projection,n.fov,e,Math.abs(n.near),Math.abs(n.far)),c(u,n.position,n.direction),a(n.view,n.position,u,n.up),l(),n}e=e||{};var n=r(e);n.fov=o(e.fov,Math.PI/4),n.near=o(e.near,1),n.far=o(e.far,100);var u=[0,0,0],l=n.update;return t(),i(n,{update:t})}},{"./camera-base":16,defined:10,"gl-mat4/lookAt":27,"gl-mat4/perspective":29,"gl-vec3/add":30,"object-assign":40}],19:[function(e,t,n){function r(e,t,n,r,c){o(e,n[0],n[1],0),o(t,n[0],n[1],1),i(e,e,r,c),i(t,t,r,c),s(t,t,e),a(t,t)}var i=e("camera-unproject"),o=e("gl-vec3/set"),s=e("gl-vec3/subtract"),a=e("gl-vec3/normalize");t.exports=r},{"camera-unproject":23,"gl-vec3/normalize":34,"gl-vec3/set":37,"gl-vec3/subtract":39}],20:[function(e,t,n){function r(e,t,n,r){var u=n[0],l=n[1],p=n[2],f=n[3],d=s,h=a;o(c,t[0],t[1],t[2],1),i(c,c,r);var v=c[3];return 0!==v&&(c[0]=c[0]/v,c[1]=c[1]/v,c[2]=c[2]/v),e[0]=u+p/2*c[0]+(0+p/2),e[1]=l+f/2*c[1]+(0+f/2),e[2]=(h-d)/2*c[2]+(h+d)/2,e[3]=0===v?0:1/v,e}var i=e("gl-vec4/transformMat4"),o=e("gl-vec4/set"),s=0,a=1,c=[0,0,0,0];t.exports=r},{"gl-vec4/set":21,"gl-vec4/transformMat4":22}],21:[function(e,t,n){function r(e,t,n,r,i){return e[0]=t,e[1]=n,e[2]=r,e[3]=i,e}t.exports=r},{}],22:[function(e,t,n){function r(e,t,n){var r=t[0],i=t[1],o=t[2],s=t[3];return e[0]=n[0]*r+n[4]*i+n[8]*o+n[12]*s,e[1]=n[1]*r+n[5]*i+n[9]*o+n[13]*s,e[2]=n[2]*r+n[6]*i+n[10]*o+n[14]*s,e[3]=n[3]*r+n[7]*i+n[11]*o+n[15]*s,e}t.exports=r},{}],23:[function(e,t,n){function r(e,t,n,r){var o=n[0],s=n[1],a=n[2],c=n[3],u=t[0],l=t[1],p=t[2];return u-=o,l=c-l-1,l-=s,e[0]=2*u/a-1,e[1]=2*l/c-1,e[2]=2*p-1,i(e,e,r)}var i=e("./lib/projectMat4");t.exports=r},{"./lib/projectMat4":24}],24:[function(e,t,n){function r(e,t,n){var r=t[0],i=t[1],o=t[2],s=n[0],a=n[1],c=n[2],u=n[3],l=n[4],p=n[5],f=n[6],d=n[7],h=n[8],v=n[9],g=n[10],m=n[11],y=n[12],w=n[13],b=n[14],x=n[15],_=1/(r*u+i*d+o*m+x);return e[0]=(r*s+i*l+o*h+y)*_,e[1]=(r*a+i*p+o*v+w)*_,e[2]=(r*c+i*f+o*g+b)*_,e}t.exports=r},{}],25:[function(e,t,n){function r(e){return e[0]=1,e[1]=0,e[2]=0,e[3]=0,e[4]=0,e[5]=1,e[6]=0,e[7]=0,e[8]=0,e[9]=0,e[10]=1,e[11]=0,e[12]=0,e[13]=0,e[14]=0,e[15]=1,e}t.exports=r},{}],26:[function(e,t,n){function r(e,t){var n=t[0],r=t[1],i=t[2],o=t[3],s=t[4],a=t[5],c=t[6],u=t[7],l=t[8],p=t[9],f=t[10],d=t[11],h=t[12],v=t[13],g=t[14],m=t[15],y=n*a-r*s,w=n*c-i*s,b=n*u-o*s,x=r*c-i*a,_=r*u-o*a,k=i*u-o*c,j=l*v-p*h,A=l*g-f*h,C=l*m-d*h,L=p*g-f*v,E=p*m-d*v,M=f*m-d*g,O=y*M-w*E+b*L+x*C-_*A+k*j;return O?(O=1/O,e[0]=(a*M-c*E+u*L)*O,e[1]=(i*E-r*M-o*L)*O,e[2]=(v*k-g*_+m*x)*O,e[3]=(f*_-p*k-d*x)*O,e[4]=(c*C-s*M-u*A)*O,e[5]=(n*M-i*C+o*A)*O,e[6]=(g*b-h*k-m*w)*O,e[7]=(l*k-f*b+d*w)*O,e[8]=(s*E-a*C+u*j)*O,e[9]=(r*C-n*E-o*j)*O,e[10]=(h*_-v*b+m*y)*O,e[11]=(p*b-l*_-d*y)*O,e[12]=(a*A-s*L-c*j)*O,e[13]=(n*L-r*A+i*j)*O,e[14]=(v*w-h*x-g*y)*O,e[15]=(l*x-p*w+f*y)*O,e):null}t.exports=r},{}],27:[function(e,t,n){function r(e,t,n,r){var o,s,a,c,u,l,p,f,d,h,v=t[0],g=t[1],m=t[2],y=r[0],w=r[1],b=r[2],x=n[0],_=n[1],k=n[2];return Math.abs(v-x)<1e-6&&Math.abs(g-_)<1e-6&&Math.abs(m-k)<1e-6?i(e):(p=v-x,f=g-_,d=m-k,h=1/Math.sqrt(p*p+f*f+d*d),p*=h,f*=h,d*=h,o=w*d-b*f,s=b*p-y*d,a=y*f-w*p,h=Math.sqrt(o*o+s*s+a*a),h?(h=1/h,o*=h,s*=h,a*=h):(o=0,s=0,a=0),c=f*a-d*s,u=d*o-p*a,l=p*s-f*o,h=Math.sqrt(c*c+u*u+l*l),h?(h=1/h,c*=h,u*=h,l*=h):(c=0,u=0,l=0),e[0]=o,e[1]=c,e[2]=p,e[3]=0,e[4]=s,e[5]=u,e[6]=f,e[7]=0,e[8]=a,e[9]=l,e[10]=d,e[11]=0,e[12]=-(o*v+s*g+a*m),e[13]=-(c*v+u*g+l*m),e[14]=-(p*v+f*g+d*m),e[15]=1,e)}var i=e("./identity");t.exports=r},{"./identity":25}],28:[function(e,t,n){function r(e,t,n){var r=t[0],i=t[1],o=t[2],s=t[3],a=t[4],c=t[5],u=t[6],l=t[7],p=t[8],f=t[9],d=t[10],h=t[11],v=t[12],g=t[13],m=t[14],y=t[15],w=n[0],b=n[1],x=n[2],_=n[3];return e[0]=w*r+b*a+x*p+_*v,e[1]=w*i+b*c+x*f+_*g,e[2]=w*o+b*u+x*d+_*m,e[3]=w*s+b*l+x*h+_*y,w=n[4],b=n[5],x=n[6],_=n[7],e[4]=w*r+b*a+x*p+_*v,e[5]=w*i+b*c+x*f+_*g,e[6]=w*o+b*u+x*d+_*m,e[7]=w*s+b*l+x*h+_*y,w=n[8],b=n[9],x=n[10],_=n[11],e[8]=w*r+b*a+x*p+_*v,e[9]=w*i+b*c+x*f+_*g,e[10]=w*o+b*u+x*d+_*m,e[11]=w*s+b*l+x*h+_*y,w=n[12],b=n[13],x=n[14],_=n[15],e[12]=w*r+b*a+x*p+_*v,e[13]=w*i+b*c+x*f+_*g,e[14]=w*o+b*u+x*d+_*m,e[15]=w*s+b*l+x*h+_*y,e}t.exports=r},{}],29:[function(e,t,n){function r(e,t,n,r,i){var o=1/Math.tan(t/2),s=1/(r-i);return e[0]=o/n,e[1]=0,e[2]=0,e[3]=0,e[4]=0,e[5]=o,e[6]=0,e[7]=0,e[8]=0,e[9]=0,e[10]=(i+r)*s,e[11]=-1,e[12]=0,e[13]=0,e[14]=2*i*r*s,e[15]=0,e}t.exports=r},{}],30:[function(e,t,n){function r(e,t,n){return e[0]=t[0]+n[0],e[1]=t[1]+n[1],e[2]=t[2]+n[2],e}t.exports=r},{}],31:[function(e,t,n){function r(e,t){return e[0]=t[0],e[1]=t[1],e[2]=t[2],e}t.exports=r},{}],32:[function(e,t,n){function r(e,t,n){var r=t[0],i=t[1],o=t[2],s=n[0],a=n[1],c=n[2];return e[0]=i*c-o*a,e[1]=o*s-r*c,e[2]=r*a-i*s,e}t.exports=r},{}],33:[function(e,t,n){function r(e,t){return e[0]*t[0]+e[1]*t[1]+e[2]*t[2]}t.exports=r},{}],34:[function(e,t,n){function r(e,t){var n=t[0],r=t[1],i=t[2],o=n*n+r*r+i*i;return o>0&&(o=1/Math.sqrt(o),e[0]=t[0]*o,e[1]=t[1]*o,e[2]=t[2]*o),e}t.exports=r},{}],35:[function(e,t,n){function r(e,t,n){return e[0]=t[0]*n,e[1]=t[1]*n,e[2]=t[2]*n,e}t.exports=r},{}],36:[function(e,t,n){function r(e,t,n,r){return e[0]=t[0]+n[0]*r,e[1]=t[1]+n[1]*r,e[2]=t[2]+n[2]*r,e}t.exports=r},{}],37:[function(e,t,n){function r(e,t,n,r){return e[0]=t,e[1]=n,e[2]=r,e}t.exports=r},{}],38:[function(e,t,n){function r(e,t){var n=t[0]-e[0],r=t[1]-e[1],i=t[2]-e[2];return n*n+r*r+i*i}t.exports=r},{}],39:[function(e,t,n){function r(e,t,n){return e[0]=t[0]-n[0],e[1]=t[1]-n[1],e[2]=t[2]-n[2],e}t.exports=r},{}],40:[function(e,t,n){"use strict";function r(e){if(null==e)throw new TypeError("Object.assign cannot be called with null or undefined");return Object(e)}t.exports=Object.assign||function(e,t){for(var n,i,o=r(e),s=1;s<arguments.length;s++){n=arguments[s],i=Object.keys(Object(n));for(var a=0;a<i.length;a++)o[i[a]]=n[i[a]]}return o}},{}],41:[function(e,t,n){function r(e,t){this.origin=e||[0,0,0],this.direction=t||[0,0,-1]}var i=e("ray-triangle-intersection"),o=e("ray-plane-intersection"),s=e("ray-sphere-intersection"),a=e("gl-vec3/copy"),c=[[0,0,0],[0,0,0],[0,0,0]],u=[0,0,0];t.exports=r,r.prototype.set=function(e,t){this.origin=e,this.direction=t},r.prototype.copy=function(e){a(this.origin,e.origin),a(this.direction,e.direction)},r.prototype.clone=function(){var e=new r;return e.copy(this),e},r.prototype.intersectsSphere=function(e,t){return s(u,this.origin,this.direction,e,t)},r.prototype.intersectsPlane=function(e,t){return o(u,this.origin,this.direction,e,t)},r.prototype.intersectsTriangle=function(e){return i(u,this.origin,this.direction,e)},r.prototype.intersectsTriangleCell=function(e,t){var n=e[0],r=e[1],i=e[2];return c[0]=t[n],c[1]=t[r],c[2]=t[i],this.intersectsTriangle(c)}},{"gl-vec3/copy":31,"ray-plane-intersection":42,"ray-sphere-intersection":43,"ray-triangle-intersection":44}],42:[function(e,t,n){function r(e,t,n,r,u){var l=i(n,r);if(0!==l){var p=-(i(t,r)+u)/l;return 0>p?null:(s(c,n,p),o(e,t,c))}return i(r,t)+u===0?a(e,t):null}var i=e("gl-vec3/dot"),o=e("gl-vec3/add"),s=e("gl-vec3/scale"),a=e("gl-vec3/copy");t.exports=r;var c=[0,0,0]},{"gl-vec3/add":30,"gl-vec3/copy":31,"gl-vec3/dot":33,"gl-vec3/scale":35}],43:[function(e,t,n){function r(e,t,n,r,p){s(l,r,t);var f=o(n,l);if(0>f)return null;a(l,t,n,f);var d=i(r,l),h=p*p;return d>h?null:(c(e,n,f-Math.sqrt(h-d)),u(e,e,t))}var i=e("gl-vec3/squaredDistance"),o=e("gl-vec3/dot"),s=e("gl-vec3/subtract"),a=e("gl-vec3/scaleAndAdd"),c=e("gl-vec3/scale"),u=e("gl-vec3/add"),l=[0,0,0];t.exports=r},{"gl-vec3/add":30,"gl-vec3/dot":33,"gl-vec3/scale":35,"gl-vec3/scaleAndAdd":36,"gl-vec3/squaredDistance":38,"gl-vec3/subtract":39}],44:[function(e,t,n){function r(e,t,n,r){s(c,r[1],r[0]),s(u,r[2],r[0]),i(p,n,u);var d=o(c,p);if(a>d)return null;s(l,t,r[0]);var h=o(l,p);if(0>h||h>d)return null;i(f,l,c);var v=o(n,f);if(0>v||h+v>d)return null;var g=o(u,f)/d;return e[0]=t[0]+g*n[0],e[1]=t[1]+g*n[1],e[2]=t[2]+g*n[2],e}var i=e("gl-vec3/cross"),o=e("gl-vec3/dot"),s=e("gl-vec3/subtract"),a=1e-6,c=[0,0,0],u=[0,0,0],l=[0,0,0],p=[0,0,0],f=[0,0,0];t.exports=r},{"gl-vec3/cross":32,"gl-vec3/dot":33,"gl-vec3/subtract":39}],45:[function(e,t,n){"use strict";var r=e("strict-uri-encode");n.extract=function(e){return e.split("?")[1]||""},n.parse=function(e){return"string"!=typeof e?{}:(e=e.trim().replace(/^(\?|#|&)/,""),e?e.split("&").reduce(function(e,t){var n=t.replace(/\+/g," ").split("="),r=n[0],i=n[1];return r=decodeURIComponent(r),i=void 0===i?null:decodeURIComponent(i),e.hasOwnProperty(r)?Array.isArray(e[r])?e[r].push(i):e[r]=[e[r],i]:e[r]=i,e},{}):{})},n.stringify=function(e){return e?Object.keys(e).sort().map(function(t){var n=e[t];return Array.isArray(n)?n.sort().map(function(e){return r(t)+"="+r(e)}).join("&"):r(t)+"="+r(n)}).filter(function(e){return e.length>0}).join("&"):""}},{"strict-uri-encode":46}],46:[function(e,t,n){"use strict";t.exports=function(e){return encodeURIComponent(e).replace(/[!'()*]/g,function(e){return"%"+e.charCodeAt(0).toString(16)})}},{}],47:[function(e,t,n){function r(e){return this instanceof r?(this.running=!1,this.last=s(),this._frame=0,this._tick=this.tick.bind(this),void(e&&this.on("tick",e))):new r(e)}var i=e("inherits"),o=e("events").EventEmitter,s=e("right-now"),a=e("raf");t.exports=r,i(r,o),r.prototype.start=function(){return this.running?void 0:(this.running=!0,this.last=s(),this._frame=a(this._tick),this)},r.prototype.stop=function(){return this.running=!1,0!==this._frame&&a.cancel(this._frame),this._frame=0,this},r.prototype.tick=function(){this._frame=a(this._tick);var e=s(),t=e-this.last;this.emit("tick",t),this.last=e}},{events:3,inherits:48,raf:49,"right-now":51}],48:[function(e,t,n){"function"==typeof Object.create?t.exports=function(e,t){e.super_=t,e.prototype=Object.create(t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}})}:t.exports=function(e,t){e.super_=t;var n=function(){};n.prototype=t.prototype,e.prototype=new n,e.prototype.constructor=e}},{}],49:[function(e,t,n){for(var r=e("performance-now"),i="undefined"==typeof window?{}:window,o=["moz","webkit"],s="AnimationFrame",a=i["request"+s],c=i["cancel"+s]||i["cancelRequest"+s],u=0;u<o.length&&!a;u++)a=i[o[u]+"Request"+s],c=i[o[u]+"Cancel"+s]||i[o[u]+"CancelRequest"+s];if(!a||!c){var l=0,p=0,f=[],d=1e3/60;a=function(e){if(0===f.length){var t=r(),n=Math.max(0,d-(t-l));l=n+t,setTimeout(function(){var e=f.slice(0);f.length=0;for(var t=0;t<e.length;t++)if(!e[t].cancelled)try{e[t].callback(l)}catch(n){setTimeout(function(){throw n},0)}},Math.round(n))}return f.push({handle:++p,callback:e,cancelled:!1}),p},c=function(e){for(var t=0;t<f.length;t++)f[t].handle===e&&(f[t].cancelled=!0)}}t.exports=function(e){return a.call(i,e)},t.exports.cancel=function(){c.apply(i,arguments)}},{"performance-now":50}],50:[function(e,t,n){(function(e){(function(){var n,r,i;"undefined"!=typeof performance&&null!==performance&&performance.now?t.exports=function(){return performance.now()}:"undefined"!=typeof e&&null!==e&&e.hrtime?(t.exports=function(){return(n()-i)/1e6},r=e.hrtime,n=function(){var e;return e=r(),1e9*e[0]+e[1]},i=n()):Date.now?(t.exports=function(){return Date.now()-i},i=Date.now()):(t.exports=function(){return(new Date).getTime()-i},i=(new Date).getTime())}).call(this)}).call(this,e("_process"))},{_process:4}],51:[function(e,t,n){(function(e){t.exports=e.performance&&e.performance.now?function(){return performance.now()}:Date.now||function(){return+new Date}}).call(this,"undefined"!=typeof global?global:"undefined"!=typeof self?self:"undefined"!=typeof window?window:{})},{}],52:[function(e,t,n){function r(e){if(e)throw e}function i(e,t){l||(c(".npm-scb-wrap {\n  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  font-weight: 200;\n  position: absolute;\n  top: 0;\n  left: 0;\n  z-index: 999;\n}\n\n.npm-scb-wrap a {\n  text-decoration: none;\n  color: #000;\n}\n.npm-scb-white\n.npm-scb-wrap a {\n  color: #fff;\n}\n\n.npm-scb-inner {\n  position: absolute;\n  top: -120px; left: 0;\n  padding: 8px;\n  width: 100%;\n  height: 150px;\n  z-index: 2;\n  -webkit-transition: width 0.5s cubic-bezier(1, 0, 0, 1), top 0.5s;\n     -moz-transition: width 0.5s cubic-bezier(1, 0, 0, 1), top 0.5s;\n      -ms-transition: width 0.5s cubic-bezier(1, 0, 0, 1), top 0.5s;\n       -o-transition: width 0.5s cubic-bezier(1, 0, 0, 1), top 0.5s;\n          transition: width 0.5s cubic-bezier(1, 0, 0, 1), top 0.5s;\n}\n.npm-scb-wrap:hover\n.npm-scb-inner {\n  top: 0;\n}\n\n.npm-scb-artwork {\n  position: absolute;\n  top: 16px; left: 16px;\n  width: 104px; height: 104px;\n  box-shadow: 0 0 8px -3px #000;\n  outline: 1px solid rgba(0,0,0,0.1);\n  z-index: 2;\n}\n.npm-scb-white\n.npm-scb-artwork {\n  outline: 1px solid rgba(255,255,255,0.1);\n  box-shadow: 0 0 10px -2px rgba(255,255,255,0.9);\n}\n\n.npm-scb-info {\n  position: absolute;\n  top: 16px;\n  left: 120px;\n  width: 300px;\n  z-index: 1;\n}\n\n.npm-scb-info > a {\n  display: block;\n}\n\n.npm-scb-now-playing {\n  font-size: 12px;\n  line-height: 12px;\n  position: absolute;\n  width: 500px;\n  z-index: 1;\n  padding: 15px 0;\n  top: 0; left: 138px;\n  opacity: 1;\n  -webkit-transition: opacity 0.25s;\n     -moz-transition: opacity 0.25s;\n      -ms-transition: opacity 0.25s;\n       -o-transition: opacity 0.25s;\n          transition: opacity 0.25s;\n}\n\n.npm-scb-wrap:hover\n.npm-scb-now-playing {\n  opacity: 0;\n}\n\n.npm-scb-white\n.npm-scb-now-playing {\n  color: #fff;\n}\n.npm-scb-now-playing > a {\n  font-weight: bold;\n}\n\n.npm-scb-info > a > p {\n  margin: 0;\n  padding-bottom: 0.25em;\n  line-height: 1.35em;\n  margin-left: 1em;\n  font-size: 1em;\n}\n\n.npm-scb-title {\n  font-weight: bold;\n}\n\n.npm-scb-icon {\n  position: absolute;\n  top: 120px;\n  padding-top: 0.75em;\n  left: 16px;\n}\n"),l=!0),f||(f=a.compile('<div class="npm-scb-wrap">\n  <div class="npm-scb-inner">\n    <a target="_blank" href="{{!urls.song}}">\n      <img class="npm-scb-icon" src="{{!icon}}">\n      <img class="npm-scb-artwork" src="{{!artwork}}">\n    </a>\n    <div class="npm-scb-info">\n      <a target="_blank" href="{{!urls.song}}">\n        <p class="npm-scb-title">{{!title}}</p>\n      </a>\n      <a target="_blank" href="{{!urls.artist}}">\n        <p class="npm-scb-artist">{{!artist}}</p>\n      </a>\n    </div>\n  </div>\n  <div class="npm-scb-now-playing">\n    Now Playing:\n    <a href="{{!urls.song}}">{{!title}}</a>\n    by\n    <a href="{{!urls.artist}}">{{!artist}}</a>\n  </div>\n</div>')),!p&&e.getFonts&&(s.add({"Open Sans":[300,600]}),p=!0),e=e||{},t=t||r;var n=e.el||document.createElement("div"),i="dark"in e&&!e.dark?"white":"black",d=e.client_id,h=e.song;return o(d,h,function(e,r){if(e)return t(e);if("track"!==r.kind)throw new Error("soundcloud-badge only supports individual tracks at the moment");n.classList["black"===i?"remove":"add"]("npm-scb-white"),n.innerHTML=f({artwork:r.artwork_url||r.user.avatar_url,artist:r.user.username,title:r.title,icon:u[i],urls:{song:r.permalink_url,artist:r.user.permalink_url}}),document.body.appendChild(n),t(null,r.stream_url+"?client_id="+d,r,n)}),n}var o=e("soundcloud-resolve"),s=e("google-fonts"),a=e("minstache"),c=e("insert-css"),u=(e("fs"),{black:"https://developers.soundcloud.com/assets/logo_black.png",white:"https://developers.soundcloud.com/assets/logo_white.png"});t.exports=i;var l=!1,p=!1,f=null},{fs:2,"google-fonts":53,"insert-css":54,minstache:55,"soundcloud-resolve":56}],53:[function(e,t,n){function r(e){var t=o(e);return'<link href="'+t+'" rel="stylesheet" type="text/css">'}function i(e){var t=o(e),n=document.createElement("link");return n.setAttribute("href",t),n.setAttribute("rel","stylesheet"),n.setAttribute("type","text/css"),n}function o(e){var t=Object.keys(e).map(function(t){var n=e[t];return t=t.replace(/\s+/,"+"),"boolean"==typeof n?t:t+":"+a(n).join(",")}).join("|");return"http://fonts.googleapis.com/css?family="+t}function s(e){var t=i(e);return document.head.appendChild(t),t}function a(e){return Array.isArray(e)?e:[e]}t.exports=r,t.exports.add=s},{}],54:[function(e,t,n){var r=[];t.exports=function(e){if(!(r.indexOf(e)>=0)){r.push(e);var t=document.createElement("style"),n=document.createTextNode(e);t.appendChild(n),document.head.childNodes.length?document.head.insertBefore(t,document.head.childNodes[0]):document.head.appendChild(t)}}},{}],55:[function(e,t,n){function r(e,t){t=t||{};var n=i(e);return n(t)}function i(e){for(var t,n=[],r=s(e),i=0;i<r.length;++i)if(t=r[i],i%2==0)n.push('"'+t.replace(/"/g,'\\"')+'"');else switch(t[0]){case"/":t=t.slice(1),n.push(") + ");break;case"^":t=t.slice(1),o(t),n.push(' + section(obj, "'+t+'", true, ');break;case"#":t=t.slice(1),o(t),n.push(' + section(obj, "'+t+'", false, ');break;case"!":t=t.slice(1),o(t),n.push(" + obj."+t+" + ");break;default:o(t),n.push(" + escape(obj."+t+") + ")}return n="\n"+a(u.toString())+";\n\n"+a(c.toString())+";\n\n  return "+n.join("").replace(/\n/g,"\\n"),new Function("obj",n)}function o(e){if(!e.match(/^[\w.]+$/))throw new Error('invalid property "'+e+'"')}function s(e){return e.split(/\{\{|\}\}/)}function a(e){return e.replace(/^/gm,"  ")}function c(e,t,n,r){var i=e[t];return"function"==typeof i?i.call(e,r):(n&&(i=!i),i?r:"")}function u(e){return String(e).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-}n=t.exports=r,n.compile=i},{}],56:[function(e,t,n){function r(e,t,n){var r="http://api.soundcloud.com/resolve.json?"+i.stringify({url:t,client_id:e});o({uri:r,method:"GET"},function(e,t,r){if(e)return n(e);try{r=JSON.parse(r)}catch(i){return n(i)}return r.errors?n(new Error(r.errors[0].error_message)):n(null,r)})}var i=e("querystring"),o=e("xhr");t.exports=r},{querystring:7,xhr:57}],57:[function(e,t,n){function r(e,t){function n(){4===l.readyState&&r()}function r(){var e=null,n=l.statusCode=l.status,r=l.body=l.response||l.responseText||l.responseXML;if(0===n||n>=400&&600>n){var i=l.responseText||a[String(l.status).charAt(0)];e=new Error(i),e.statusCode=l.status}if(v)try{r=l.body=JSON.parse(r)}catch(o){}t(e,l,r)}function o(e){t(e,l)}"string"==typeof e&&(e={uri:e}),e=e||{},t=s(t);var l;l=e.cors?new u:new c;var p=l.url=e.uri,f=l.method=e.method||"GET",d=e.body||e.data,h=l.headers=e.headers||{},v=!1;return"json"in e&&(v=!0,h["Content-Type"]="application/json",d=JSON.stringify(e.json)),l.onreadystatechange=n,l.onload=r,l.onerror=o,l.onprogress=function(){},l.ontimeout=i,l.open(f,p),e.cors&&(l.withCredentials=!0),l.timeout="timeout"in e?e.timeout:5e3,l.setRequestHeader&&Object.keys(h).forEach(function(e){l.setRequestHeader(e,h[e])}),l.send(d),l}function i(){}var o=e("global/window"),s=e("once"),a={0:"Internal XMLHttpRequest Error",4:"4xx Client Error",5:"5xx Server Error"},c=o.XMLHttpRequest||i,u="withCredentials"in new c?o.XMLHttpRequest:o.XDomainRequest;t.exports=r},{"global/window":58,once:59}],58:[function(e,t,n){(function(e){"undefined"!=typeof window?t.exports=window:"undefined"!=typeof e?t.exports=e:t.exports={}}).call(this,"undefined"!=typeof global?global:"undefined"!=typeof self?self:"undefined"!=typeof window?window:{})},{}],59:[function(e,t,n){function r(e){var t=!1;return function(){return t?void 0:(t=!0,e.apply(this,arguments))}}t.exports=r,r.proto=r(function(){Object.defineProperty(Function.prototype,"once",{value:function(){return r(this)},configurable:!0})})},{}],60:[function(e,t,n){function r(e){return e.replace(/[\/]+/g,"/").replace(/\/\?/g,"?").replace(/\/\#/g,"#").replace(/\:\//g,"://")}t.exports=function(){var e=[].slice.call(arguments,0).join("/");return r(e)}},{}],61:[function(e,t,n){function r(e,t,n){if(!(this instanceof r))return new r(e,t,n);if(t instanceof i||(n=t,t=null),n=n||{},this.ctx=t=t||new i,e instanceof AudioNode||(e=e instanceof Audio?t.createMediaElementSource(e):t.createMediaStreamSource(e)),this.analyser=t.createAnalyser(),this.stereo=!!n.stereo,this.audible=n.audible!==!1,this.wavedata=null,this.freqdata=null,this.splitter=null,this.merger=null,this.source=e,this.stereo){this.analyser=[this.analyser],this.analyser.push(t.createAnalyser()),this.splitter=t.createChannelSplitter(2),this.merger=t.createChannelMerger(2),this.output=this.merger,this.source.connect(this.splitter);for(var o=0;2>o;o++)this.splitter.connect(this.analyser[o],o,0),this.analyser[o].connect(this.merger,0,o);this.audible&&this.merger.connect(t.destination)}else this.output=this.source,this.source.connect(this.analyser),this.audible&&this.analyser.connect(t.destination)}var i=window.AudioContext||window.webkitAudioContext;t.exports=r,r.prototype.waveform=function(e,t){e||(e=this.wavedata||(this.wavedata=new Uint8Array((this.analyser[0]||this.analyser).frequencyBinCount)));var n=this.stereo?this.analyser[t||0]:this.analyser;return n.getByteTimeDomainData(e),e},r.prototype.frequencies=function(e,t){e||(e=this.freqdata||(this.freqdata=new Uint8Array((this.analyser[0]||this.analyser).frequencyBinCount)));var n=this.stereo?this.analyser[t||0]:this.analyser;return n.getByteFrequencyData(e),e}},{}],62:[function(e,t,n){"use strict";t.exports=[{capacity:1e3,distance:.2,alpha:.05,seek:0,extent:1,position:[0,-3.5,0],url:"https://soundcloud.com/max-richter/5-sarajevo"},{capacity:1e3,seek:0,distance:.2,alpha:.35,extent:.5,position:[0,-3.5,0],url:"https://soundcloud.com/max-richter/5-sarajevo"},{capacity:900,distance:.35,alpha:.1,extent:.65,seek:60,position:[0,-3.5,0],url:"https://soundcloud.com/erasedtapes/rival-consoles-recovery"},{capacity:1e3,distance:.2,alpha:.15,extent:.25,position:[0,3.5,0],url:"https://soundcloud.com/futureclassic/hayden-james-something-about-you-2"},{capacity:500,distance:.01,extent:.2,alpha:.7,position:[0,3.5,0],url:"https://soundcloud.com/futureclassic/hayden-james-something-about-you-2"}]},{}]},{},[1]);
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/projects/demoscene/spins/index.js":[function(require,module,exports){
+(function (global){
+'use strict';
+
+var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }; })();
+
+var Analyser = require('web-audio-analyser');
+var createCamera = require('perspective-camera');
+var createLoop = require('raf-loop');
+var getContext = require('get-canvas-context');
+var lerp = require('lerp');
+var once = require('once');
+var defined = require('defined');
+var fit = require('canvas-fit');
+var queryString = require('query-string');
+var soundcloud = require('soundcloud-badge');
+var urlJoin = require('url-join');
+var presets = require('./presets');
+var showError = require('./lib/error');
+
+var AudioContext = window.AudioContext || window.webkitAudioContext;
+var audioContext = AudioContext ? new AudioContext() : null;
+var context = getContext('2d');
+var canvas = context.canvas;
+document.body.appendChild(canvas);
+document.body.style.overflow = 'hidden';
+
+var errMessage = 'Sorry, this demo only works in Chrome and FireFox!';
+var loop = createLoop();
+var oldDiv = undefined,
+    oldAudio = undefined;
+
+if (!AudioContext) {
+  showError(errMessage);
+} else {
+  global.load = loadTrack;
+  loadTrack();
+  printOptions();
+}
+
+function loadTrack(opt) {
+  if (oldAudio) oldAudio.pause();
+  if (oldDiv) oldDiv.parentNode.removeChild(oldDiv);
+  loop.stop();
+  loop.removeAllListeners('tick');
+
+  if (!opt) {
+    opt = presets[Math.floor(Math.random() * presets.length)];
+  } else if (typeof opt === 'string') {
+    opt = { url: opt };
+  }
+
+  var queryUrl = getQueryTrack();
+  soundcloud({
+    client_id: 'b95f61a90da961736c03f659c03cb0cc',
+    song: getTrackUrl(queryUrl || opt.url),
+    dark: true,
+    getFonts: true
+  }, function (err, src, json, div) {
+    if (err) {
+      showError(errMessage);
+    }
+    oldDiv = div;
+    startAudio(src, opt);
+  });
+}
+
+function startAudio(src, opt) {
+  var audio = new Audio();
+  audio.crossOrigin = 'Anonymous';
+  audio.addEventListener('canplay', once(function () {
+    if (opt.seek) audio.currentTime = opt.seek;
+    renderTrack(audio, opt);
+    audio.play();
+  }));
+  audio.src = src;
+  oldAudio = audio;
+}
+
+function renderTrack(audio, opt) {
+  var node = Analyser(audio, audioContext, { audible: true, stereo: false });
+
+  var shape = [window.innerWidth, window.innerHeight];
+  var dpr = window.devicePixelRatio;
+
+  // scale and fit to screen
+  fit(canvas, window, dpr)();
+
+  var time = 0;
+
+  var camera = createCamera({
+    fov: Math.PI / 4,
+    near: 0.01,
+    far: 100,
+    viewport: [0, 0].concat(shape)
+  });
+
+  var duration = audio.duration;
+  var cursor = [0, 0, 0];
+  var positions = [];
+  var positionMax = defined(opt.capacity, 1000);
+  var dist = defined(opt.distance, 0.25);
+  var ySize = defined(opt.extent, 0.5);
+
+  loop.on('tick', render).start();
+
+  function render(dt) {
+    time += dt / 1000;
+    var dur = time / duration;
+    if (dur > 1) return loop.stop();
+
+    var audioData = node.waveform();
+    var bufferLength = audioData.length;
+
+    // set up our camera
+    // with WebGL (persistent lines) could be
+    // interesting to fly through it in 3d
+    camera.identity();
+    camera.translate(opt.position || [0, 3.5, 0]);
+    camera.lookAt([0, 0, 0]);
+    camera.update();
+
+    context.save();
+    context.scale(dpr, dpr);
+
+    // for a motion trail effect
+    // const [width, height] = shape
+    // context.fillStyle = 'rgba(255,255,255,0.001)'
+    // context.fillRect(0, 0, width, height)
+
+    var radius = 1 - dur;
+    var startAngle = time;
+    var alpha = opt.alpha || 0.25;
+    context.strokeStyle = 'rgba(0, 0, 0, ' + alpha + ')';
+    context.lineWidth = 1;
+    context.lineJoin = 'round';
+    context.beginPath();
+    for (var i = positions.length - 1; i >= 0; i--) {
+      var pos = positions[i];
+      context.lineTo(pos[0], pos[1]);
+    }
+    context.stroke();
+    context.restore();
+
+    for (var i = 0; i < bufferLength; i++) {
+      var _alpha = i / (bufferLength - 1);
+      var angle = lerp(startAngle + dist, startAngle, _alpha);
+      cursor[0] = Math.cos(angle) * radius;
+      cursor[2] = Math.sin(angle) * radius;
+
+      var amplitude = audioData[i] / 128.0;
+      var waveY = amplitude * ySize / 2;
+
+      var adjusted = [cursor[0], cursor[1] + waveY, cursor[2]];
+
+      var _camera$project = camera.project(adjusted);
+
+      var _camera$project2 = _slicedToArray(_camera$project, 2);
+
+      var x = _camera$project2[0];
+      var y = _camera$project2[1];
+
+      if (positions.length > positionMax) {
+        positions.shift();
+      }
+      positions.push([x, y]);
+    }
+  }
+}
+
+function printOptions() {
+  console.log('%cspins', 'font-weight: bold; padding: 3px; background: #ededed;');
+  console.log('Reload the page for another preset.\n    \nTo change tracks and settings:\n\n  load()    // loads a random track\n  load(url) // loads a SoundCloud url\n  load(opt) // loads with full options\n  \n  options:\n    url        the URL to load\n    capacity   number of line segments per tick\n    distance   radial distance along circle to draw each tick\n    position   camera [x, y, z]\n    extent     amount to extend away from line center\n    alpha      line opacity\n    seek       seconds to jump into the song at\n\n\nYou can also specify a short URL in the query and it will take precedence.\n  http://mattdesl.github.io/spins?url=roman-mars/99-invisible-162-mystery-house\n');
+}
+
+function getQueryTrack() {
+  return queryString.parse(window.location.search).url;
+}
+
+function getTrackUrl(url) {
+  if (!url) return null;
+  if (!/https?:/i.test(url)) {
+    url = urlJoin('https://soundcloud.com/', url);
+  }
+  return url;
+}
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./lib/error":"/projects/demoscene/spins/lib/error.js","./presets":"/projects/demoscene/spins/presets.js","canvas-fit":"/projects/demoscene/spins/node_modules/canvas-fit/index.js","defined":"/projects/demoscene/spins/node_modules/defined/index.js","get-canvas-context":"/projects/demoscene/spins/node_modules/get-canvas-context/index.js","lerp":"/projects/demoscene/spins/node_modules/lerp/index.js","once":"/projects/demoscene/spins/node_modules/once/once.js","perspective-camera":"/projects/demoscene/spins/node_modules/perspective-camera/index.js","query-string":"/projects/demoscene/spins/node_modules/query-string/index.js","raf-loop":"/projects/demoscene/spins/node_modules/raf-loop/index.js","soundcloud-badge":"/projects/oss/soundcloud-badge/index.js","url-join":"/projects/demoscene/spins/node_modules/url-join/lib/url-join.js","web-audio-analyser":"/projects/demoscene/spins/node_modules/web-audio-analyser/index.js"}],"/projects/demoscene/spins/lib/error.js":[function(require,module,exports){
+'use strict';
+
+var assign = require('object-assign');
+
+module.exports = error;
+function error(err) {
+  var element = document.createElement('pre');
+  element.textContent = err.message ? err.message : err;
+  document.body.appendChild(element);
+  assign(element.style, {
+    position: 'fixed',
+    width: '100%',
+    'z-index': '100000',
+    height: '100%',
+    top: '0',
+    left: '0',
+    padding: '20px',
+    'box-sizing': 'border-box',
+    'word-wrap': 'break-word',
+    'font-size': '16px',
+    margin: '0',
+    background: '#fff', // or ffefef ?
+    color: '#ff0000'
+  });
+}
+
+},{"object-assign":"/projects/demoscene/spins/node_modules/object-assign/index.js"}],"/projects/demoscene/spins/node_modules/browserify/lib/_empty.js":[function(require,module,exports){
+
+},{}],"/projects/demoscene/spins/node_modules/browserify/node_modules/events/events.js":[function(require,module,exports){
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+function EventEmitter() {
+  this._events = this._events || {};
+  this._maxListeners = this._maxListeners || undefined;
+}
+module.exports = EventEmitter;
+
+// Backwards-compat with node 0.10.x
+EventEmitter.EventEmitter = EventEmitter;
+
+EventEmitter.prototype._events = undefined;
+EventEmitter.prototype._maxListeners = undefined;
+
+// By default EventEmitters will print a warning if more than 10 listeners are
+// added to it. This is a useful default which helps finding memory leaks.
+EventEmitter.defaultMaxListeners = 10;
+
+// Obviously not all Emitters should be limited to 10. This function allows
+// that to be increased. Set to zero for unlimited.
+EventEmitter.prototype.setMaxListeners = function(n) {
+  if (!isNumber(n) || n < 0 || isNaN(n))
+    throw TypeError('n must be a positive number');
+  this._maxListeners = n;
+  return this;
+};
+
+EventEmitter.prototype.emit = function(type) {
+  var er, handler, len, args, i, listeners;
+
+  if (!this._events)
+    this._events = {};
+
+  // If there is no 'error' event listener then throw.
+  if (type === 'error') {
+    if (!this._events.error ||
+        (isObject(this._events.error) && !this._events.error.length)) {
+      er = arguments[1];
+      if (er instanceof Error) {
+        throw er; // Unhandled 'error' event
+      }
+      throw TypeError('Uncaught, unspecified "error" event.');
+    }
+  }
+
+  handler = this._events[type];
+
+  if (isUndefined(handler))
+    return false;
+
+  if (isFunction(handler)) {
+    switch (arguments.length) {
+      // fast cases
+      case 1:
+        handler.call(this);
+        break;
+      case 2:
+        handler.call(this, arguments[1]);
+        break;
+      case 3:
+        handler.call(this, arguments[1], arguments[2]);
+        break;
+      // slower
+      default:
+        len = arguments.length;
+        args = new Array(len - 1);
+        for (i = 1; i < len; i++)
+          args[i - 1] = arguments[i];
+        handler.apply(this, args);
+    }
+  } else if (isObject(handler)) {
+    len = arguments.length;
+    args = new Array(len - 1);
+    for (i = 1; i < len; i++)
+      args[i - 1] = arguments[i];
+
+    listeners = handler.slice();
+    len = listeners.length;
+    for (i = 0; i < len; i++)
+      listeners[i].apply(this, args);
+  }
+
+  return true;
+};
+
+EventEmitter.prototype.addListener = function(type, listener) {
+  var m;
+
+  if (!isFunction(listener))
+    throw TypeError('listener must be a function');
+
+  if (!this._events)
+    this._events = {};
+
+  // To avoid recursion in the case that type === "newListener"! Before
+  // adding it to the listeners, first emit "newListener".
+  if (this._events.newListener)
+    this.emit('newListener', type,
+              isFunction(listener.listener) ?
+              listener.listener : listener);
+
+  if (!this._events[type])
+    // Optimize the case of one listener. Don't need the extra array object.
+    this._events[type] = listener;
+  else if (isObject(this._events[type]))
+    // If we've already got an array, just append.
+    this._events[type].push(listener);
+  else
+    // Adding the second element, need to change to array.
+    this._events[type] = [this._events[type], listener];
+
+  // Check for listener leak
+  if (isObject(this._events[type]) && !this._events[type].warned) {
+    var m;
+    if (!isUndefined(this._maxListeners)) {
+      m = this._maxListeners;
+    } else {
+      m = EventEmitter.defaultMaxListeners;
+    }
+
+    if (m && m > 0 && this._events[type].length > m) {
+      this._events[type].warned = true;
+      console.error('(node) warning: possible EventEmitter memory ' +
+                    'leak detected. %d listeners added. ' +
+                    'Use emitter.setMaxListeners() to increase limit.',
+                    this._events[type].length);
+      if (typeof console.trace === 'function') {
+        // not supported in IE 10
+        console.trace();
+      }
+    }
+  }
+
+  return this;
+};
+
+EventEmitter.prototype.on = EventEmitter.prototype.addListener;
+
+EventEmitter.prototype.once = function(type, listener) {
+  if (!isFunction(listener))
+    throw TypeError('listener must be a function');
+
+  var fired = false;
+
+  function g() {
+    this.removeListener(type, g);
+
+    if (!fired) {
+      fired = true;
+      listener.apply(this, arguments);
+    }
+  }
+
+  g.listener = listener;
+  this.on(type, g);
+
+  return this;
+};
+
+// emits a 'removeListener' event iff the listener was removed
+EventEmitter.prototype.removeListener = function(type, listener) {
+  var list, position, length, i;
+
+  if (!isFunction(listener))
+    throw TypeError('listener must be a function');
+
+  if (!this._events || !this._events[type])
+    return this;
+
+  list = this._events[type];
+  length = list.length;
+  position = -1;
+
+  if (list === listener ||
+      (isFunction(list.listener) && list.listener === listener)) {
+    delete this._events[type];
+    if (this._events.removeListener)
+      this.emit('removeListener', type, listener);
+
+  } else if (isObject(list)) {
+    for (i = length; i-- > 0;) {
+      if (list[i] === listener ||
+          (list[i].listener && list[i].listener === listener)) {
+        position = i;
+        break;
+      }
+    }
+
+    if (position < 0)
+      return this;
+
+    if (list.length === 1) {
+      list.length = 0;
+      delete this._events[type];
+    } else {
+      list.splice(position, 1);
+    }
+
+    if (this._events.removeListener)
+      this.emit('removeListener', type, listener);
+  }
+
+  return this;
+};
+
+EventEmitter.prototype.removeAllListeners = function(type) {
+  var key, listeners;
+
+  if (!this._events)
+    return this;
+
+  // not listening for removeListener, no need to emit
+  if (!this._events.removeListener) {
+    if (arguments.length === 0)
+      this._events = {};
+    else if (this._events[type])
+      delete this._events[type];
+    return this;
+  }
+
+  // emit removeListener for all listeners on all events
+  if (arguments.length === 0) {
+    for (key in this._events) {
+      if (key === 'removeListener') continue;
+      this.removeAllListeners(key);
+    }
+    this.removeAllListeners('removeListener');
+    this._events = {};
+    return this;
+  }
+
+  listeners = this._events[type];
+
+  if (isFunction(listeners)) {
+    this.removeListener(type, listeners);
+  } else {
+    // LIFO order
+    while (listeners.length)
+      this.removeListener(type, listeners[listeners.length - 1]);
+  }
+  delete this._events[type];
+
+  return this;
+};
+
+EventEmitter.prototype.listeners = function(type) {
+  var ret;
+  if (!this._events || !this._events[type])
+    ret = [];
+  else if (isFunction(this._events[type]))
+    ret = [this._events[type]];
+  else
+    ret = this._events[type].slice();
+  return ret;
+};
+
+EventEmitter.listenerCount = function(emitter, type) {
+  var ret;
+  if (!emitter._events || !emitter._events[type])
+    ret = 0;
+  else if (isFunction(emitter._events[type]))
+    ret = 1;
+  else
+    ret = emitter._events[type].length;
+  return ret;
+};
+
+function isFunction(arg) {
+  return typeof arg === 'function';
+}
+
+function isNumber(arg) {
+  return typeof arg === 'number';
+}
+
+function isObject(arg) {
+  return typeof arg === 'object' && arg !== null;
+}
+
+function isUndefined(arg) {
+  return arg === void 0;
+}
+
+},{}],"/projects/demoscene/spins/node_modules/browserify/node_modules/process/browser.js":[function(require,module,exports){
+// shim for using process in browser
+
+var process = module.exports = {};
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = setTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    clearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        setTimeout(drainQueue, 0);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
+
+},{}],"/projects/demoscene/spins/node_modules/browserify/node_modules/querystring-es3/decode.js":[function(require,module,exports){
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+'use strict';
+
+// If obj.hasOwnProperty has been overridden, then calling
+// obj.hasOwnProperty(prop) will break.
+// See: https://github.com/joyent/node/issues/1707
+function hasOwnProperty(obj, prop) {
+  return Object.prototype.hasOwnProperty.call(obj, prop);
+}
+
+module.exports = function(qs, sep, eq, options) {
+  sep = sep || '&';
+  eq = eq || '=';
+  var obj = {};
+
+  if (typeof qs !== 'string' || qs.length === 0) {
+    return obj;
+  }
+
+  var regexp = /\+/g;
+  qs = qs.split(sep);
+
+  var maxKeys = 1000;
+  if (options && typeof options.maxKeys === 'number') {
+    maxKeys = options.maxKeys;
+  }
+
+  var len = qs.length;
+  // maxKeys <= 0 means that we should not limit keys count
+  if (maxKeys > 0 && len > maxKeys) {
+    len = maxKeys;
+  }
+
+  for (var i = 0; i < len; ++i) {
+    var x = qs[i].replace(regexp, '%20'),
+        idx = x.indexOf(eq),
+        kstr, vstr, k, v;
+
+    if (idx >= 0) {
+      kstr = x.substr(0, idx);
+      vstr = x.substr(idx + 1);
+    } else {
+      kstr = x;
+      vstr = '';
+    }
+
+    k = decodeURIComponent(kstr);
+    v = decodeURIComponent(vstr);
+
+    if (!hasOwnProperty(obj, k)) {
+      obj[k] = v;
+    } else if (isArray(obj[k])) {
+      obj[k].push(v);
+    } else {
+      obj[k] = [obj[k], v];
+    }
+  }
+
+  return obj;
+};
+
+var isArray = Array.isArray || function (xs) {
+  return Object.prototype.toString.call(xs) === '[object Array]';
+};
+
+},{}],"/projects/demoscene/spins/node_modules/browserify/node_modules/querystring-es3/encode.js":[function(require,module,exports){
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+'use strict';
+
+var stringifyPrimitive = function(v) {
+  switch (typeof v) {
+    case 'string':
+      return v;
+
+    case 'boolean':
+      return v ? 'true' : 'false';
+
+    case 'number':
+      return isFinite(v) ? v : '';
+
+    default:
+      return '';
+  }
+};
+
+module.exports = function(obj, sep, eq, name) {
+  sep = sep || '&';
+  eq = eq || '=';
+  if (obj === null) {
+    obj = undefined;
+  }
+
+  if (typeof obj === 'object') {
+    return map(objectKeys(obj), function(k) {
+      var ks = encodeURIComponent(stringifyPrimitive(k)) + eq;
+      if (isArray(obj[k])) {
+        return map(obj[k], function(v) {
+          return ks + encodeURIComponent(stringifyPrimitive(v));
+        }).join(sep);
+      } else {
+        return ks + encodeURIComponent(stringifyPrimitive(obj[k]));
+      }
+    }).join(sep);
+
+  }
+
+  if (!name) return '';
+  return encodeURIComponent(stringifyPrimitive(name)) + eq +
+         encodeURIComponent(stringifyPrimitive(obj));
+};
+
+var isArray = Array.isArray || function (xs) {
+  return Object.prototype.toString.call(xs) === '[object Array]';
+};
+
+function map (xs, f) {
+  if (xs.map) return xs.map(f);
+  var res = [];
+  for (var i = 0; i < xs.length; i++) {
+    res.push(f(xs[i], i));
+  }
+  return res;
+}
+
+var objectKeys = Object.keys || function (obj) {
+  var res = [];
+  for (var key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) res.push(key);
+  }
+  return res;
+};
+
+},{}],"/projects/demoscene/spins/node_modules/browserify/node_modules/querystring-es3/index.js":[function(require,module,exports){
+'use strict';
+
+exports.decode = exports.parse = require('./decode');
+exports.encode = exports.stringify = require('./encode');
+
+},{"./decode":"/projects/demoscene/spins/node_modules/browserify/node_modules/querystring-es3/decode.js","./encode":"/projects/demoscene/spins/node_modules/browserify/node_modules/querystring-es3/encode.js"}],"/projects/demoscene/spins/node_modules/canvas-fit/index.js":[function(require,module,exports){
+var size = require('element-size')
+
+module.exports = fit
+
+var scratch = new Float32Array(2)
+
+function fit(canvas, parent, scale) {
+  var isSVG = canvas.nodeName.toUpperCase() === 'SVG'
+
+  canvas.style.position = canvas.style.position || 'absolute'
+  canvas.style.top = 0
+  canvas.style.left = 0
+
+  resize.scale  = parseFloat(scale || 1)
+  resize.parent = parent
+
+  return resize()
+
+  function resize() {
+    var p = resize.parent || canvas.parentNode
+    if (typeof p === 'function') {
+      var dims   = p(scratch) || scratch
+      var width  = dims[0]
+      var height = dims[1]
+    } else
+    if (p && p !== document.body) {
+      var psize  = size(p)
+      var width  = psize[0]|0
+      var height = psize[1]|0
+    } else {
+      var width  = window.innerWidth
+      var height = window.innerHeight
+    }
+
+    if (isSVG) {
+      canvas.setAttribute('width', width * resize.scale + 'px')
+      canvas.setAttribute('height', height * resize.scale + 'px')
+    } else {
+      canvas.width = width * resize.scale
+      canvas.height = height * resize.scale
+    }
+
+    canvas.style.width = width + 'px'
+    canvas.style.height = height + 'px'
+
+    return resize
+  }
+}
+
+},{"element-size":"/projects/demoscene/spins/node_modules/canvas-fit/node_modules/element-size/index.js"}],"/projects/demoscene/spins/node_modules/canvas-fit/node_modules/element-size/index.js":[function(require,module,exports){
+module.exports = getSize
+
+function getSize(element) {
+  // Handle cases where the element is not already
+  // attached to the DOM by briefly appending it
+  // to document.body, and removing it again later.
+  if (element === window || element === document.body) {
+    return [window.innerWidth, window.innerHeight]
+  }
+
+  if (!element.parentNode) {
+    var temporary = true
+    document.body.appendChild(element)
+  }
+
+  var bounds = element.getBoundingClientRect()
+  var styles = getComputedStyle(element)
+  var height = (bounds.height|0)
+    + parse(styles.getPropertyValue('margin-top'))
+    + parse(styles.getPropertyValue('margin-bottom'))
+  var width  = (bounds.width|0)
+    + parse(styles.getPropertyValue('margin-left'))
+    + parse(styles.getPropertyValue('margin-right'))
+
+  if (temporary) {
+    document.body.removeChild(element)
+  }
+
+  return [width, height]
+}
+
+function parse(prop) {
+  return parseFloat(prop) || 0
+}
+
+},{}],"/projects/demoscene/spins/node_modules/defined/index.js":[function(require,module,exports){
+module.exports = function () {
+    for (var i = 0; i < arguments.length; i++) {
+        if (arguments[i] !== undefined) return arguments[i];
+    }
+};
+
+},{}],"/projects/demoscene/spins/node_modules/get-canvas-context/index.js":[function(require,module,exports){
+module.exports = getCanvasContext
+function getCanvasContext (type, opts) {
+  if (typeof type !== 'string') {
+    throw new TypeError('must specify type string')
+  }
+  if (typeof document === 'undefined') {
+    return null // check for Node
+  }
+
+  opts = opts || {}
+  var canvas = opts.canvas || document.createElement('canvas')
+  if (typeof opts.width === 'number') {
+    canvas.width = opts.width
+  }
+  if (typeof opts.height === 'number') {
+    canvas.height = opts.height
+  }
+
+  var attribs = opts
+  var gl
+  try {
+    var names = [ type ]
+    // prefix GL contexts
+    if (type.indexOf('webgl') === 0) {
+      names.push('experimental-' + type)
+    }
+
+    for (var i = 0; i < names.length; i++) {
+      gl = canvas.getContext(names[i], attribs)
+      if (gl) return gl
+    }
+  } catch (e) {
+    gl = null
+  }
+  return (gl || null) // ensure null on fail
+}
+
+},{}],"/projects/demoscene/spins/node_modules/lerp/index.js":[function(require,module,exports){
+function lerp(v0, v1, t) {
+    return v0*(1-t)+v1*t
+}
+module.exports = lerp
+},{}],"/projects/demoscene/spins/node_modules/object-assign/index.js":[function(require,module,exports){
+/* eslint-disable no-unused-vars */
+'use strict';
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+
+function toObject(val) {
+	if (val === null || val === undefined) {
+		throw new TypeError('Object.assign cannot be called with null or undefined');
+	}
+
+	return Object(val);
+}
+
+module.exports = Object.assign || function (target, source) {
+	var from;
+	var to = toObject(target);
+	var symbols;
+
+	for (var s = 1; s < arguments.length; s++) {
+		from = Object(arguments[s]);
+
+		for (var key in from) {
+			if (hasOwnProperty.call(from, key)) {
+				to[key] = from[key];
+			}
+		}
+
+		if (Object.getOwnPropertySymbols) {
+			symbols = Object.getOwnPropertySymbols(from);
+			for (var i = 0; i < symbols.length; i++) {
+				if (propIsEnumerable.call(from, symbols[i])) {
+					to[symbols[i]] = from[symbols[i]];
+				}
+			}
+		}
+	}
+
+	return to;
+};
+
+},{}],"/projects/demoscene/spins/node_modules/once/node_modules/wrappy/wrappy.js":[function(require,module,exports){
+// Returns a wrapper function that returns a wrapped callback
+// The wrapper function should do some stuff, and return a
+// presumably different callback function.
+// This makes sure that own properties are retained, so that
+// decorations and such are not lost along the way.
+module.exports = wrappy
+function wrappy (fn, cb) {
+  if (fn && cb) return wrappy(fn)(cb)
+
+  if (typeof fn !== 'function')
+    throw new TypeError('need wrapper function')
+
+  Object.keys(fn).forEach(function (k) {
+    wrapper[k] = fn[k]
+  })
+
+  return wrapper
+
+  function wrapper() {
+    var args = new Array(arguments.length)
+    for (var i = 0; i < args.length; i++) {
+      args[i] = arguments[i]
+    }
+    var ret = fn.apply(this, args)
+    var cb = args[args.length-1]
+    if (typeof ret === 'function' && ret !== cb) {
+      Object.keys(cb).forEach(function (k) {
+        ret[k] = cb[k]
+      })
+    }
+    return ret
+  }
+}
+
+},{}],"/projects/demoscene/spins/node_modules/once/once.js":[function(require,module,exports){
+var wrappy = require('wrappy')
+module.exports = wrappy(once)
+
+once.proto = once(function () {
+  Object.defineProperty(Function.prototype, 'once', {
+    value: function () {
+      return once(this)
+    },
+    configurable: true
+  })
+})
+
+function once (fn) {
+  var f = function () {
+    if (f.called) return f.value
+    f.called = true
+    return f.value = fn.apply(this, arguments)
+  }
+  f.called = false
+  return f
+}
+
+},{"wrappy":"/projects/demoscene/spins/node_modules/once/node_modules/wrappy/wrappy.js"}],"/projects/demoscene/spins/node_modules/perspective-camera/index.js":[function(require,module,exports){
+module.exports = require('./lib/camera-perspective')
+
+},{"./lib/camera-perspective":"/projects/demoscene/spins/node_modules/perspective-camera/lib/camera-perspective.js"}],"/projects/demoscene/spins/node_modules/perspective-camera/lib/camera-base.js":[function(require,module,exports){
+var assign = require('object-assign')
+var Ray = require('ray-3d')
+
+var cameraProject = require('camera-project')
+var cameraUnproject = require('camera-unproject')
+var cameraLookAt = require('./camera-look-at')
+var cameraPickRay = require('camera-picking-ray')
+
+var add = require('gl-vec3/add')
+var multiply4x4 = require('gl-mat4/multiply')
+var invert4x4 = require('gl-mat4/invert')
+var identity4x4 = require('gl-mat4/identity')
+var setVec3 = require('gl-vec3/set')
+
+// this could also be useful for a orthographic camera
+module.exports = function cameraBase (opt) {
+  opt = opt || {}
+
+  var camera = {
+    projection: identity4x4([]),
+    view: identity4x4([]),
+    position: opt.position || [0, 0, 0],
+    direction: opt.direction || [0, 0, -1],
+    up: opt.up || [0, 1, 0],
+    viewport: opt.viewport || [ -1, -1, 1, 1 ],
+    projView: identity4x4([]),
+    invProjView: identity4x4([])
+  }
+
+  function update () {
+    multiply4x4(camera.projView, camera.projection, camera.view)
+    var valid = invert4x4(camera.invProjView, camera.projView)
+    if (!valid) {
+      throw new Error('camera projection * view is non-invertible')
+    }
+  }
+
+  function lookAt (target) {
+    cameraLookAt(camera.direction, camera.up, camera.position, target)
+    return camera
+  }
+
+  function identity () {
+    setVec3(camera.position, 0, 0, 0)
+    setVec3(camera.direction, 0, 0, -1)
+    setVec3(camera.up, 0, 1, 0)
+    identity4x4(camera.view)
+    identity4x4(camera.projection)
+    identity4x4(camera.projView)
+    identity4x4(camera.invProjView)
+    return camera
+  }
+
+  function translate (vec) {
+    add(camera.position, camera.position, vec)
+    return camera
+  }
+
+  function createPickingRay (mouse) {
+    var ray = new Ray()
+    cameraPickRay(ray.origin, ray.direction, mouse, camera.viewport, camera.invProjView)
+    return ray
+  }
+
+  function project (point) {
+    return cameraProject([], point, camera.viewport, camera.projView)
+  }
+
+  function unproject (point) {
+    return cameraUnproject([], point, camera.viewport, camera.invProjView)
+  }
+
+  return assign(camera, {
+    translate: translate,
+    identity: identity,
+    lookAt: lookAt,
+    createPickingRay: createPickingRay,
+    update: update,
+    project: project,
+    unproject: unproject
+  })
+}
+
+},{"./camera-look-at":"/projects/demoscene/spins/node_modules/perspective-camera/lib/camera-look-at.js","camera-picking-ray":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/camera-picking-ray/index.js","camera-project":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/camera-project/index.js","camera-unproject":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/camera-unproject/index.js","gl-mat4/identity":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-mat4/identity.js","gl-mat4/invert":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-mat4/invert.js","gl-mat4/multiply":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-mat4/multiply.js","gl-vec3/add":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/add.js","gl-vec3/set":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/set.js","object-assign":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/object-assign/index.js","ray-3d":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/ray-3d/index.js"}],"/projects/demoscene/spins/node_modules/perspective-camera/lib/camera-look-at.js":[function(require,module,exports){
+// could be modularized...
+var cross = require('gl-vec3/cross')
+var sub = require('gl-vec3/subtract')
+var normalize = require('gl-vec3/normalize')
+var copy = require('gl-vec3/copy')
+var dot = require('gl-vec3/dot')
+var scale = require('gl-vec3/scale')
+
+var tmp = [0, 0, 0]
+var epsilon = 0.000000001
+
+// modifies direction & up vectors in place
+module.exports = function (direction, up, position, target) {
+  sub(tmp, target, position)
+  normalize(tmp, tmp)
+  var isZero = tmp[0] === 0 && tmp[1] === 0 && tmp[2] === 0
+  if (!isZero) {
+    var d = dot(tmp, up)
+    if (Math.abs(d - 1) < epsilon) { // collinear
+      scale(up, direction, -1)
+    } else if (Math.abs(d + 1) < epsilon) { // collinear opposite
+      copy(up, direction)
+    }
+    copy(direction, tmp)
+
+    // normalize up vector
+    cross(tmp, direction, up)
+    normalize(tmp, tmp)
+
+    cross(up, tmp, direction)
+    normalize(up, up)
+  }
+}
+
+},{"gl-vec3/copy":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/copy.js","gl-vec3/cross":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/cross.js","gl-vec3/dot":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/dot.js","gl-vec3/normalize":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/normalize.js","gl-vec3/scale":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/scale.js","gl-vec3/subtract":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/subtract.js"}],"/projects/demoscene/spins/node_modules/perspective-camera/lib/camera-perspective.js":[function(require,module,exports){
+var create = require('./camera-base')
+var assign = require('object-assign')
+var defined = require('defined')
+
+var perspective = require('gl-mat4/perspective')
+var lookAt4x4 = require('gl-mat4/lookAt')
+var add = require('gl-vec3/add')
+
+module.exports = function cameraPerspective (opt) {
+  opt = opt || {}
+
+  var camera = create(opt)
+  camera.fov = defined(opt.fov, Math.PI / 4)
+  camera.near = defined(opt.near, 1)
+  camera.far = defined(opt.far, 100)
+
+  var center = [0, 0, 0]
+
+  var updateCombined = camera.update
+
+  function update () {
+    var aspect = camera.viewport[2] / camera.viewport[3]
+
+    // build projection matrix
+    perspective(camera.projection, camera.fov, aspect, Math.abs(camera.near), Math.abs(camera.far))
+
+    // build view matrix
+    add(center, camera.position, camera.direction)
+    lookAt4x4(camera.view, camera.position, center, camera.up)
+
+    // update projection * view and invert
+    updateCombined()
+    return camera
+  }
+
+  // set it up initially from constructor options
+  update()
+  return assign(camera, {
+    update: update
+  })
+}
+
+},{"./camera-base":"/projects/demoscene/spins/node_modules/perspective-camera/lib/camera-base.js","defined":"/projects/demoscene/spins/node_modules/defined/index.js","gl-mat4/lookAt":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-mat4/lookAt.js","gl-mat4/perspective":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-mat4/perspective.js","gl-vec3/add":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/add.js","object-assign":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/object-assign/index.js"}],"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/camera-picking-ray/index.js":[function(require,module,exports){
+var unproject = require('camera-unproject')
+var set = require('gl-vec3/set')
+var sub = require('gl-vec3/subtract')
+var normalize = require('gl-vec3/normalize')
+
+module.exports = createPickRay
+function createPickRay(origin, direction, point, viewport, invProjView) {
+  set(origin, point[0], point[1], 0)
+  set(direction, point[0], point[1], 1)
+  unproject(origin, origin, viewport, invProjView)
+  unproject(direction, direction, viewport, invProjView)
+  sub(direction, direction, origin)
+  normalize(direction, direction)
+}
+},{"camera-unproject":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/camera-unproject/index.js","gl-vec3/normalize":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/normalize.js","gl-vec3/set":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/set.js","gl-vec3/subtract":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/subtract.js"}],"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/camera-project/index.js":[function(require,module,exports){
+var transformMat4 = require('gl-vec4/transformMat4')
+var set = require('gl-vec4/set')
+
+var NEAR_RANGE = 0
+var FAR_RANGE = 1
+var tmp4 = [0, 0, 0, 0]
+
+module.exports = cameraProject
+function cameraProject (out, vec, viewport, combinedProjView) {
+  var vX = viewport[0],
+    vY = viewport[1],
+    vWidth = viewport[2],
+    vHeight = viewport[3],
+    n = NEAR_RANGE,
+    f = FAR_RANGE
+
+  // convert: clip space -> NDC -> window coords
+  // implicit 1.0 for w component
+  set(tmp4, vec[0], vec[1], vec[2], 1.0)
+
+  // transform into clip space
+  transformMat4(tmp4, tmp4, combinedProjView)
+
+  // now transform into NDC
+  var w = tmp4[3]
+  if (w !== 0) { // how to handle infinity here?
+    tmp4[0] = tmp4[0] / w
+    tmp4[1] = tmp4[1] / w
+    tmp4[2] = tmp4[2] / w
+  }
+
+  // and finally into window coordinates
+  // the foruth component is (1/clip.w)
+  // which is the same as gl_FragCoord.w
+  out[0] = vX + vWidth / 2 * tmp4[0] + (0 + vWidth / 2)
+  out[1] = vY + vHeight / 2 * tmp4[1] + (0 + vHeight / 2)
+  out[2] = (f - n) / 2 * tmp4[2] + (f + n) / 2
+  out[3] = w === 0 ? 0 : 1 / w
+  return out
+}
+
+},{"gl-vec4/set":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/camera-project/node_modules/gl-vec4/set.js","gl-vec4/transformMat4":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/camera-project/node_modules/gl-vec4/transformMat4.js"}],"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/camera-project/node_modules/gl-vec4/set.js":[function(require,module,exports){
+module.exports = set
+
+/**
+ * Set the components of a vec4 to the given values
+ *
+ * @param {vec4} out the receiving vector
+ * @param {Number} x X component
+ * @param {Number} y Y component
+ * @param {Number} z Z component
+ * @param {Number} w W component
+ * @returns {vec4} out
+ */
+function set (out, x, y, z, w) {
+  out[0] = x
+  out[1] = y
+  out[2] = z
+  out[3] = w
+  return out
+}
+
+},{}],"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/camera-project/node_modules/gl-vec4/transformMat4.js":[function(require,module,exports){
+module.exports = transformMat4
+
+/**
+ * Transforms the vec4 with a mat4.
+ *
+ * @param {vec4} out the receiving vector
+ * @param {vec4} a the vector to transform
+ * @param {mat4} m matrix to transform with
+ * @returns {vec4} out
+ */
+function transformMat4 (out, a, m) {
+  var x = a[0], y = a[1], z = a[2], w = a[3]
+  out[0] = m[0] * x + m[4] * y + m[8] * z + m[12] * w
+  out[1] = m[1] * x + m[5] * y + m[9] * z + m[13] * w
+  out[2] = m[2] * x + m[6] * y + m[10] * z + m[14] * w
+  out[3] = m[3] * x + m[7] * y + m[11] * z + m[15] * w
+  return out
+}
+
+},{}],"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/camera-unproject/index.js":[function(require,module,exports){
+var transform = require('./lib/projectMat4')
+
+module.exports = unproject
+
+/**
+ * Unproject a point from screen space to 3D space.
+ * The point should have its x and y properties set to
+ * 2D screen space, and the z either at 0 (near plane)
+ * or 1 (far plane). The provided matrix is assumed to already
+ * be combined, i.e. projection * view.
+ *
+ * After this operation, the out vector's [x, y, z] components will
+ * represent the unprojected 3D coordinate.
+ *
+ * @param  {vec3} out               the output vector
+ * @param  {vec3} vec               the 2D space vector to unproject
+ * @param  {vec4} viewport          screen x, y, width and height in pixels
+ * @param  {mat4} invProjectionView combined projection and view matrix
+ * @return {vec3}                   the output vector
+ */
+function unproject (out, vec, viewport, invProjectionView) {
+  var viewX = viewport[0],
+    viewY = viewport[1],
+    viewWidth = viewport[2],
+    viewHeight = viewport[3]
+
+  var x = vec[0],
+    y = vec[1],
+    z = vec[2]
+
+  x = x - viewX
+  y = viewHeight - y - 1
+  y = y - viewY
+
+  out[0] = (2 * x) / viewWidth - 1
+  out[1] = (2 * y) / viewHeight - 1
+  out[2] = 2 * z - 1
+  return transform(out, out, invProjectionView)
+}
+
+},{"./lib/projectMat4":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/camera-unproject/lib/projectMat4.js"}],"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/camera-unproject/lib/projectMat4.js":[function(require,module,exports){
+module.exports = project
+
+/**
+ * Multiplies the input vec by the specified matrix, 
+ * applying a W divide, and stores the result in out 
+ * vector. This is useful for projection,
+ * e.g. unprojecting a 2D point into 3D space.
+ *
+ * @method  prj
+ * @param {vec3} out the output vector
+ * @param {vec3} vec the input vector to project
+ * @param {mat4} m the 4x4 matrix to multiply with 
+ * @return {vec3} the out vector
+ */
+function project (out, vec, m) {
+  var x = vec[0],
+    y = vec[1],
+    z = vec[2],
+    a00 = m[0], a01 = m[1], a02 = m[2], a03 = m[3],
+    a10 = m[4], a11 = m[5], a12 = m[6], a13 = m[7],
+    a20 = m[8], a21 = m[9], a22 = m[10], a23 = m[11],
+    a30 = m[12], a31 = m[13], a32 = m[14], a33 = m[15]
+
+  var lw = 1 / (x * a03 + y * a13 + z * a23 + a33)
+
+  out[0] = (x * a00 + y * a10 + z * a20 + a30) * lw
+  out[1] = (x * a01 + y * a11 + z * a21 + a31) * lw
+  out[2] = (x * a02 + y * a12 + z * a22 + a32) * lw
+  return out
+}
+
+},{}],"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-mat4/identity.js":[function(require,module,exports){
+module.exports = identity;
+
+/**
+ * Set a mat4 to the identity matrix
+ *
+ * @param {mat4} out the receiving matrix
+ * @returns {mat4} out
+ */
+function identity(out) {
+    out[0] = 1;
+    out[1] = 0;
+    out[2] = 0;
+    out[3] = 0;
+    out[4] = 0;
+    out[5] = 1;
+    out[6] = 0;
+    out[7] = 0;
+    out[8] = 0;
+    out[9] = 0;
+    out[10] = 1;
+    out[11] = 0;
+    out[12] = 0;
+    out[13] = 0;
+    out[14] = 0;
+    out[15] = 1;
+    return out;
+};
+},{}],"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-mat4/invert.js":[function(require,module,exports){
+module.exports = invert;
+
+/**
+ * Inverts a mat4
+ *
+ * @param {mat4} out the receiving matrix
+ * @param {mat4} a the source matrix
+ * @returns {mat4} out
+ */
+function invert(out, a) {
+    var a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3],
+        a10 = a[4], a11 = a[5], a12 = a[6], a13 = a[7],
+        a20 = a[8], a21 = a[9], a22 = a[10], a23 = a[11],
+        a30 = a[12], a31 = a[13], a32 = a[14], a33 = a[15],
+
+        b00 = a00 * a11 - a01 * a10,
+        b01 = a00 * a12 - a02 * a10,
+        b02 = a00 * a13 - a03 * a10,
+        b03 = a01 * a12 - a02 * a11,
+        b04 = a01 * a13 - a03 * a11,
+        b05 = a02 * a13 - a03 * a12,
+        b06 = a20 * a31 - a21 * a30,
+        b07 = a20 * a32 - a22 * a30,
+        b08 = a20 * a33 - a23 * a30,
+        b09 = a21 * a32 - a22 * a31,
+        b10 = a21 * a33 - a23 * a31,
+        b11 = a22 * a33 - a23 * a32,
+
+        // Calculate the determinant
+        det = b00 * b11 - b01 * b10 + b02 * b09 + b03 * b08 - b04 * b07 + b05 * b06;
+
+    if (!det) { 
+        return null; 
+    }
+    det = 1.0 / det;
+
+    out[0] = (a11 * b11 - a12 * b10 + a13 * b09) * det;
+    out[1] = (a02 * b10 - a01 * b11 - a03 * b09) * det;
+    out[2] = (a31 * b05 - a32 * b04 + a33 * b03) * det;
+    out[3] = (a22 * b04 - a21 * b05 - a23 * b03) * det;
+    out[4] = (a12 * b08 - a10 * b11 - a13 * b07) * det;
+    out[5] = (a00 * b11 - a02 * b08 + a03 * b07) * det;
+    out[6] = (a32 * b02 - a30 * b05 - a33 * b01) * det;
+    out[7] = (a20 * b05 - a22 * b02 + a23 * b01) * det;
+    out[8] = (a10 * b10 - a11 * b08 + a13 * b06) * det;
+    out[9] = (a01 * b08 - a00 * b10 - a03 * b06) * det;
+    out[10] = (a30 * b04 - a31 * b02 + a33 * b00) * det;
+    out[11] = (a21 * b02 - a20 * b04 - a23 * b00) * det;
+    out[12] = (a11 * b07 - a10 * b09 - a12 * b06) * det;
+    out[13] = (a00 * b09 - a01 * b07 + a02 * b06) * det;
+    out[14] = (a31 * b01 - a30 * b03 - a32 * b00) * det;
+    out[15] = (a20 * b03 - a21 * b01 + a22 * b00) * det;
+
+    return out;
+};
+},{}],"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-mat4/lookAt.js":[function(require,module,exports){
+var identity = require('./identity');
+
+module.exports = lookAt;
+
+/**
+ * Generates a look-at matrix with the given eye position, focal point, and up axis
+ *
+ * @param {mat4} out mat4 frustum matrix will be written into
+ * @param {vec3} eye Position of the viewer
+ * @param {vec3} center Point the viewer is looking at
+ * @param {vec3} up vec3 pointing up
+ * @returns {mat4} out
+ */
+function lookAt(out, eye, center, up) {
+    var x0, x1, x2, y0, y1, y2, z0, z1, z2, len,
+        eyex = eye[0],
+        eyey = eye[1],
+        eyez = eye[2],
+        upx = up[0],
+        upy = up[1],
+        upz = up[2],
+        centerx = center[0],
+        centery = center[1],
+        centerz = center[2];
+
+    if (Math.abs(eyex - centerx) < 0.000001 &&
+        Math.abs(eyey - centery) < 0.000001 &&
+        Math.abs(eyez - centerz) < 0.000001) {
+        return identity(out);
+    }
+
+    z0 = eyex - centerx;
+    z1 = eyey - centery;
+    z2 = eyez - centerz;
+
+    len = 1 / Math.sqrt(z0 * z0 + z1 * z1 + z2 * z2);
+    z0 *= len;
+    z1 *= len;
+    z2 *= len;
+
+    x0 = upy * z2 - upz * z1;
+    x1 = upz * z0 - upx * z2;
+    x2 = upx * z1 - upy * z0;
+    len = Math.sqrt(x0 * x0 + x1 * x1 + x2 * x2);
+    if (!len) {
+        x0 = 0;
+        x1 = 0;
+        x2 = 0;
+    } else {
+        len = 1 / len;
+        x0 *= len;
+        x1 *= len;
+        x2 *= len;
+    }
+
+    y0 = z1 * x2 - z2 * x1;
+    y1 = z2 * x0 - z0 * x2;
+    y2 = z0 * x1 - z1 * x0;
+
+    len = Math.sqrt(y0 * y0 + y1 * y1 + y2 * y2);
+    if (!len) {
+        y0 = 0;
+        y1 = 0;
+        y2 = 0;
+    } else {
+        len = 1 / len;
+        y0 *= len;
+        y1 *= len;
+        y2 *= len;
+    }
+
+    out[0] = x0;
+    out[1] = y0;
+    out[2] = z0;
+    out[3] = 0;
+    out[4] = x1;
+    out[5] = y1;
+    out[6] = z1;
+    out[7] = 0;
+    out[8] = x2;
+    out[9] = y2;
+    out[10] = z2;
+    out[11] = 0;
+    out[12] = -(x0 * eyex + x1 * eyey + x2 * eyez);
+    out[13] = -(y0 * eyex + y1 * eyey + y2 * eyez);
+    out[14] = -(z0 * eyex + z1 * eyey + z2 * eyez);
+    out[15] = 1;
+
+    return out;
+};
+},{"./identity":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-mat4/identity.js"}],"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-mat4/multiply.js":[function(require,module,exports){
+module.exports = multiply;
+
+/**
+ * Multiplies two mat4's
+ *
+ * @param {mat4} out the receiving matrix
+ * @param {mat4} a the first operand
+ * @param {mat4} b the second operand
+ * @returns {mat4} out
+ */
+function multiply(out, a, b) {
+    var a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3],
+        a10 = a[4], a11 = a[5], a12 = a[6], a13 = a[7],
+        a20 = a[8], a21 = a[9], a22 = a[10], a23 = a[11],
+        a30 = a[12], a31 = a[13], a32 = a[14], a33 = a[15];
+
+    // Cache only the current line of the second matrix
+    var b0  = b[0], b1 = b[1], b2 = b[2], b3 = b[3];  
+    out[0] = b0*a00 + b1*a10 + b2*a20 + b3*a30;
+    out[1] = b0*a01 + b1*a11 + b2*a21 + b3*a31;
+    out[2] = b0*a02 + b1*a12 + b2*a22 + b3*a32;
+    out[3] = b0*a03 + b1*a13 + b2*a23 + b3*a33;
+
+    b0 = b[4]; b1 = b[5]; b2 = b[6]; b3 = b[7];
+    out[4] = b0*a00 + b1*a10 + b2*a20 + b3*a30;
+    out[5] = b0*a01 + b1*a11 + b2*a21 + b3*a31;
+    out[6] = b0*a02 + b1*a12 + b2*a22 + b3*a32;
+    out[7] = b0*a03 + b1*a13 + b2*a23 + b3*a33;
+
+    b0 = b[8]; b1 = b[9]; b2 = b[10]; b3 = b[11];
+    out[8] = b0*a00 + b1*a10 + b2*a20 + b3*a30;
+    out[9] = b0*a01 + b1*a11 + b2*a21 + b3*a31;
+    out[10] = b0*a02 + b1*a12 + b2*a22 + b3*a32;
+    out[11] = b0*a03 + b1*a13 + b2*a23 + b3*a33;
+
+    b0 = b[12]; b1 = b[13]; b2 = b[14]; b3 = b[15];
+    out[12] = b0*a00 + b1*a10 + b2*a20 + b3*a30;
+    out[13] = b0*a01 + b1*a11 + b2*a21 + b3*a31;
+    out[14] = b0*a02 + b1*a12 + b2*a22 + b3*a32;
+    out[15] = b0*a03 + b1*a13 + b2*a23 + b3*a33;
+    return out;
+};
+},{}],"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-mat4/perspective.js":[function(require,module,exports){
+module.exports = perspective;
+
+/**
+ * Generates a perspective projection matrix with the given bounds
+ *
+ * @param {mat4} out mat4 frustum matrix will be written into
+ * @param {number} fovy Vertical field of view in radians
+ * @param {number} aspect Aspect ratio. typically viewport width/height
+ * @param {number} near Near bound of the frustum
+ * @param {number} far Far bound of the frustum
+ * @returns {mat4} out
+ */
+function perspective(out, fovy, aspect, near, far) {
+    var f = 1.0 / Math.tan(fovy / 2),
+        nf = 1 / (near - far);
+    out[0] = f / aspect;
+    out[1] = 0;
+    out[2] = 0;
+    out[3] = 0;
+    out[4] = 0;
+    out[5] = f;
+    out[6] = 0;
+    out[7] = 0;
+    out[8] = 0;
+    out[9] = 0;
+    out[10] = (far + near) * nf;
+    out[11] = -1;
+    out[12] = 0;
+    out[13] = 0;
+    out[14] = (2 * far * near) * nf;
+    out[15] = 0;
+    return out;
+};
+},{}],"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/add.js":[function(require,module,exports){
+module.exports = add;
+
+/**
+ * Adds two vec3's
+ *
+ * @param {vec3} out the receiving vector
+ * @param {vec3} a the first operand
+ * @param {vec3} b the second operand
+ * @returns {vec3} out
+ */
+function add(out, a, b) {
+    out[0] = a[0] + b[0]
+    out[1] = a[1] + b[1]
+    out[2] = a[2] + b[2]
+    return out
+}
+},{}],"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/copy.js":[function(require,module,exports){
+module.exports = copy;
+
+/**
+ * Copy the values from one vec3 to another
+ *
+ * @param {vec3} out the receiving vector
+ * @param {vec3} a the source vector
+ * @returns {vec3} out
+ */
+function copy(out, a) {
+    out[0] = a[0]
+    out[1] = a[1]
+    out[2] = a[2]
+    return out
+}
+},{}],"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/cross.js":[function(require,module,exports){
+module.exports = cross;
+
+/**
+ * Computes the cross product of two vec3's
+ *
+ * @param {vec3} out the receiving vector
+ * @param {vec3} a the first operand
+ * @param {vec3} b the second operand
+ * @returns {vec3} out
+ */
+function cross(out, a, b) {
+    var ax = a[0], ay = a[1], az = a[2],
+        bx = b[0], by = b[1], bz = b[2]
+
+    out[0] = ay * bz - az * by
+    out[1] = az * bx - ax * bz
+    out[2] = ax * by - ay * bx
+    return out
+}
+},{}],"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/dot.js":[function(require,module,exports){
+module.exports = dot;
+
+/**
+ * Calculates the dot product of two vec3's
+ *
+ * @param {vec3} a the first operand
+ * @param {vec3} b the second operand
+ * @returns {Number} dot product of a and b
+ */
+function dot(a, b) {
+    return a[0] * b[0] + a[1] * b[1] + a[2] * b[2]
+}
+},{}],"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/normalize.js":[function(require,module,exports){
+module.exports = normalize;
+
+/**
+ * Normalize a vec3
+ *
+ * @param {vec3} out the receiving vector
+ * @param {vec3} a vector to normalize
+ * @returns {vec3} out
+ */
+function normalize(out, a) {
+    var x = a[0],
+        y = a[1],
+        z = a[2]
+    var len = x*x + y*y + z*z
+    if (len > 0) {
+        //TODO: evaluate use of glm_invsqrt here?
+        len = 1 / Math.sqrt(len)
+        out[0] = a[0] * len
+        out[1] = a[1] * len
+        out[2] = a[2] * len
+    }
+    return out
+}
+},{}],"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/scale.js":[function(require,module,exports){
+module.exports = scale;
+
+/**
+ * Scales a vec3 by a scalar number
+ *
+ * @param {vec3} out the receiving vector
+ * @param {vec3} a the vector to scale
+ * @param {Number} b amount to scale the vector by
+ * @returns {vec3} out
+ */
+function scale(out, a, b) {
+    out[0] = a[0] * b
+    out[1] = a[1] * b
+    out[2] = a[2] * b
+    return out
+}
+},{}],"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/scaleAndAdd.js":[function(require,module,exports){
+module.exports = scaleAndAdd;
+
+/**
+ * Adds two vec3's after scaling the second operand by a scalar value
+ *
+ * @param {vec3} out the receiving vector
+ * @param {vec3} a the first operand
+ * @param {vec3} b the second operand
+ * @param {Number} scale the amount to scale b by before adding
+ * @returns {vec3} out
+ */
+function scaleAndAdd(out, a, b, scale) {
+    out[0] = a[0] + (b[0] * scale)
+    out[1] = a[1] + (b[1] * scale)
+    out[2] = a[2] + (b[2] * scale)
+    return out
+}
+},{}],"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/set.js":[function(require,module,exports){
+module.exports = set;
+
+/**
+ * Set the components of a vec3 to the given values
+ *
+ * @param {vec3} out the receiving vector
+ * @param {Number} x X component
+ * @param {Number} y Y component
+ * @param {Number} z Z component
+ * @returns {vec3} out
+ */
+function set(out, x, y, z) {
+    out[0] = x
+    out[1] = y
+    out[2] = z
+    return out
+}
+},{}],"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/squaredDistance.js":[function(require,module,exports){
+module.exports = squaredDistance;
+
+/**
+ * Calculates the squared euclidian distance between two vec3's
+ *
+ * @param {vec3} a the first operand
+ * @param {vec3} b the second operand
+ * @returns {Number} squared distance between a and b
+ */
+function squaredDistance(a, b) {
+    var x = b[0] - a[0],
+        y = b[1] - a[1],
+        z = b[2] - a[2]
+    return x*x + y*y + z*z
+}
+},{}],"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/subtract.js":[function(require,module,exports){
+module.exports = subtract;
+
+/**
+ * Subtracts vector b from vector a
+ *
+ * @param {vec3} out the receiving vector
+ * @param {vec3} a the first operand
+ * @param {vec3} b the second operand
+ * @returns {vec3} out
+ */
+function subtract(out, a, b) {
+    out[0] = a[0] - b[0]
+    out[1] = a[1] - b[1]
+    out[2] = a[2] - b[2]
+    return out
+}
+},{}],"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/object-assign/index.js":[function(require,module,exports){
+'use strict';
+
+function ToObject(val) {
+	if (val == null) {
+		throw new TypeError('Object.assign cannot be called with null or undefined');
+	}
+
+	return Object(val);
+}
+
+module.exports = Object.assign || function (target, source) {
+	var from;
+	var keys;
+	var to = ToObject(target);
+
+	for (var s = 1; s < arguments.length; s++) {
+		from = arguments[s];
+		keys = Object.keys(Object(from));
+
+		for (var i = 0; i < keys.length; i++) {
+			to[keys[i]] = from[keys[i]];
+		}
+	}
+
+	return to;
+};
+
+},{}],"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/ray-3d/index.js":[function(require,module,exports){
+var intersectRayTriangle = require('ray-triangle-intersection')
+var intersectRayPlane = require('ray-plane-intersection')
+var intersectRaySphere = require('ray-sphere-intersection')
+var copy3 = require('gl-vec3/copy')
+
+var tmpTriangle = [
+  [0, 0, 0],
+  [0, 0, 0],
+  [0, 0, 0]
+]
+
+var tmp3 = [0, 0, 0]
+
+module.exports = Ray
+function Ray (origin, direction) {
+  this.origin = origin || [ 0, 0, 0 ]
+  this.direction = direction || [ 0, 0, -1 ]
+}
+
+Ray.prototype.set = function (origin, direction) {
+  this.origin = origin
+  this.direction = direction
+}
+
+Ray.prototype.copy = function (other) {
+  copy3(this.origin, other.origin)
+  copy3(this.direction, other.direction)
+}
+
+Ray.prototype.clone = function () {
+  var other = new Ray()
+  other.copy(this)
+  return other
+}
+
+Ray.prototype.intersectsSphere = function (center, radius) {
+  return intersectRaySphere(tmp3, this.origin, this.direction, center, radius)
+}
+
+Ray.prototype.intersectsPlane = function (normal, distance) {
+  return intersectRayPlane(tmp3, this.origin, this.direction, normal, distance)
+}
+
+Ray.prototype.intersectsTriangle = function (triangle) {
+  return intersectRayTriangle(tmp3, this.origin, this.direction, triangle)
+}
+
+Ray.prototype.intersectsTriangleCell = function (cell, positions) {
+  var a = cell[0], b = cell[1], c = cell[2]
+  tmpTriangle[0] = positions[a]
+  tmpTriangle[1] = positions[b]
+  tmpTriangle[2] = positions[c]
+  return this.intersectsTriangle(tmpTriangle)
+}
+
+},{"gl-vec3/copy":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/copy.js","ray-plane-intersection":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/ray-3d/node_modules/ray-plane-intersection/index.js","ray-sphere-intersection":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/ray-3d/node_modules/ray-sphere-intersection/index.js","ray-triangle-intersection":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/ray-3d/node_modules/ray-triangle-intersection/index.js"}],"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/ray-3d/node_modules/ray-plane-intersection/index.js":[function(require,module,exports){
+var dot = require('gl-vec3/dot')
+var add = require('gl-vec3/add')
+var scale = require('gl-vec3/scale')
+var copy = require('gl-vec3/copy')
+
+module.exports = intersectRayPlane
+
+var v0 = [0, 0, 0]
+
+function intersectRayPlane(out, origin, direction, normal, dist) {
+  var denom = dot(direction, normal)
+  if (denom !== 0) {
+    var t = -(dot(origin, normal) + dist) / denom
+    if (t < 0) {
+      return null
+    }
+    scale(v0, direction, t)
+    return add(out, origin, v0)
+  } else if (dot(normal, origin) + dist === 0) {
+    return copy(out, origin)
+  } else {
+    return null
+  }
+}
+
+},{"gl-vec3/add":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/add.js","gl-vec3/copy":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/copy.js","gl-vec3/dot":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/dot.js","gl-vec3/scale":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/scale.js"}],"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/ray-3d/node_modules/ray-sphere-intersection/index.js":[function(require,module,exports){
+var squaredDist = require('gl-vec3/squaredDistance')
+var dot = require('gl-vec3/dot')
+var sub = require('gl-vec3/subtract')
+var scaleAndAdd = require('gl-vec3/scaleAndAdd')
+var scale = require('gl-vec3/scale')
+var add = require('gl-vec3/add')
+
+var tmp = [0, 0, 0]
+
+module.exports = intersectRaySphere
+function intersectRaySphere (out, origin, direction, center, radius) {
+  sub(tmp, center, origin)
+  var len = dot(direction, tmp)
+  if (len < 0) { // sphere is behind ray
+    return null
+  }
+
+  scaleAndAdd(tmp, origin, direction, len)
+  var dSq = squaredDist(center, tmp)
+  var rSq = radius * radius
+  if (dSq > rSq) {
+    return null
+  }
+
+  scale(out, direction, len - Math.sqrt(rSq - dSq))
+  return add(out, out, origin)
+}
+
+},{"gl-vec3/add":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/add.js","gl-vec3/dot":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/dot.js","gl-vec3/scale":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/scale.js","gl-vec3/scaleAndAdd":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/scaleAndAdd.js","gl-vec3/squaredDistance":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/squaredDistance.js","gl-vec3/subtract":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/subtract.js"}],"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/ray-3d/node_modules/ray-triangle-intersection/index.js":[function(require,module,exports){
+var cross = require('gl-vec3/cross');
+var dot = require('gl-vec3/dot');
+var sub = require('gl-vec3/subtract');
+
+var EPSILON = 0.000001;
+var edge1 = [0,0,0];
+var edge2 = [0,0,0];
+var tvec = [0,0,0];
+var pvec = [0,0,0];
+var qvec = [0,0,0];
+
+module.exports = intersectTriangle;
+
+function intersectTriangle (out, pt, dir, tri) {
+    sub(edge1, tri[1], tri[0]);
+    sub(edge2, tri[2], tri[0]);
+    
+    cross(pvec, dir, edge2);
+    var det = dot(edge1, pvec);
+    
+    if (det < EPSILON) return null;
+    sub(tvec, pt, tri[0]);
+    var u = dot(tvec, pvec);
+    if (u < 0 || u > det) return null;
+    cross(qvec, tvec, edge1);
+    var v = dot(dir, qvec);
+    if (v < 0 || u + v > det) return null;
+    
+    var t = dot(edge2, qvec) / det;
+    out[0] = pt[0] + t * dir[0];
+    out[1] = pt[1] + t * dir[1];
+    out[2] = pt[2] + t * dir[2];
+    return out;
+}
+
+},{"gl-vec3/cross":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/cross.js","gl-vec3/dot":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/dot.js","gl-vec3/subtract":"/projects/demoscene/spins/node_modules/perspective-camera/node_modules/gl-vec3/subtract.js"}],"/projects/demoscene/spins/node_modules/query-string/index.js":[function(require,module,exports){
+'use strict';
+var strictUriEncode = require('strict-uri-encode');
+
+exports.extract = function (str) {
+	return str.split('?')[1] || '';
+};
+
+exports.parse = function (str) {
+	if (typeof str !== 'string') {
+		return {};
+	}
+
+	str = str.trim().replace(/^(\?|#|&)/, '');
+
+	if (!str) {
+		return {};
+	}
+
+	return str.split('&').reduce(function (ret, param) {
+		var parts = param.replace(/\+/g, ' ').split('=');
+		var key = parts[0];
+		var val = parts[1];
+
+		key = decodeURIComponent(key);
+
+		// missing `=` should be `null`:
+		// http://w3.org/TR/2012/WD-url-20120524/#collect-url-parameters
+		val = val === undefined ? null : decodeURIComponent(val);
+
+		if (!ret.hasOwnProperty(key)) {
+			ret[key] = val;
+		} else if (Array.isArray(ret[key])) {
+			ret[key].push(val);
+		} else {
+			ret[key] = [ret[key], val];
+		}
+
+		return ret;
+	}, {});
+};
+
+exports.stringify = function (obj) {
+	return obj ? Object.keys(obj).sort().map(function (key) {
+		var val = obj[key];
+
+		if (Array.isArray(val)) {
+			return val.sort().map(function (val2) {
+				return strictUriEncode(key) + '=' + strictUriEncode(val2);
+			}).join('&');
+		}
+
+		return strictUriEncode(key) + '=' + strictUriEncode(val);
+	}).filter(function (x) {
+		return x.length > 0;
+	}).join('&') : '';
+};
+
+},{"strict-uri-encode":"/projects/demoscene/spins/node_modules/query-string/node_modules/strict-uri-encode/index.js"}],"/projects/demoscene/spins/node_modules/query-string/node_modules/strict-uri-encode/index.js":[function(require,module,exports){
+'use strict';
+module.exports = function (str) {
+	return encodeURIComponent(str).replace(/[!'()*]/g, function (c) {
+		return '%' + c.charCodeAt(0).toString(16);
+	});
+};
+
+},{}],"/projects/demoscene/spins/node_modules/raf-loop/index.js":[function(require,module,exports){
+var inherits = require('inherits')
+var EventEmitter = require('events').EventEmitter
+var now = require('right-now')
+var raf = require('raf')
+
+module.exports = Engine
+function Engine(fn) {
+    if (!(this instanceof Engine)) 
+        return new Engine(fn)
+    this.running = false
+    this.last = now()
+    this._frame = 0
+    this._tick = this.tick.bind(this)
+
+    if (fn)
+        this.on('tick', fn)
+}
+
+inherits(Engine, EventEmitter)
+
+Engine.prototype.start = function() {
+    if (this.running) 
+        return
+    this.running = true
+    this.last = now()
+    this._frame = raf(this._tick)
+    return this
+}
+
+Engine.prototype.stop = function() {
+    this.running = false
+    if (this._frame !== 0)
+        raf.cancel(this._frame)
+    this._frame = 0
+    return this
+}
+
+Engine.prototype.tick = function() {
+    this._frame = raf(this._tick)
+    var time = now()
+    var dt = time - this.last
+    this.emit('tick', dt)
+    this.last = time
+}
+},{"events":"/projects/demoscene/spins/node_modules/browserify/node_modules/events/events.js","inherits":"/projects/demoscene/spins/node_modules/raf-loop/node_modules/inherits/inherits_browser.js","raf":"/projects/demoscene/spins/node_modules/raf-loop/node_modules/raf/index.js","right-now":"/projects/demoscene/spins/node_modules/raf-loop/node_modules/right-now/browser.js"}],"/projects/demoscene/spins/node_modules/raf-loop/node_modules/inherits/inherits_browser.js":[function(require,module,exports){
+if (typeof Object.create === 'function') {
+  // implementation from standard node.js 'util' module
+  module.exports = function inherits(ctor, superCtor) {
+    ctor.super_ = superCtor
+    ctor.prototype = Object.create(superCtor.prototype, {
+      constructor: {
+        value: ctor,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+  };
+} else {
+  // old school shim for old browsers
+  module.exports = function inherits(ctor, superCtor) {
+    ctor.super_ = superCtor
+    var TempCtor = function () {}
+    TempCtor.prototype = superCtor.prototype
+    ctor.prototype = new TempCtor()
+    ctor.prototype.constructor = ctor
+  }
+}
+
+},{}],"/projects/demoscene/spins/node_modules/raf-loop/node_modules/raf/index.js":[function(require,module,exports){
+var now = require('performance-now')
+  , global = typeof window === 'undefined' ? {} : window
+  , vendors = ['moz', 'webkit']
+  , suffix = 'AnimationFrame'
+  , raf = global['request' + suffix]
+  , caf = global['cancel' + suffix] || global['cancelRequest' + suffix]
+
+for(var i = 0; i < vendors.length && !raf; i++) {
+  raf = global[vendors[i] + 'Request' + suffix]
+  caf = global[vendors[i] + 'Cancel' + suffix]
+      || global[vendors[i] + 'CancelRequest' + suffix]
+}
+
+// Some versions of FF have rAF but not cAF
+if(!raf || !caf) {
+  var last = 0
+    , id = 0
+    , queue = []
+    , frameDuration = 1000 / 60
+
+  raf = function(callback) {
+    if(queue.length === 0) {
+      var _now = now()
+        , next = Math.max(0, frameDuration - (_now - last))
+      last = next + _now
+      setTimeout(function() {
+        var cp = queue.slice(0)
+        // Clear queue here to prevent
+        // callbacks from appending listeners
+        // to the current frame's queue
+        queue.length = 0
+        for(var i = 0; i < cp.length; i++) {
+          if(!cp[i].cancelled) {
+            try{
+              cp[i].callback(last)
+            } catch(e) {
+              setTimeout(function() { throw e }, 0)
+            }
+          }
+        }
+      }, Math.round(next))
+    }
+    queue.push({
+      handle: ++id,
+      callback: callback,
+      cancelled: false
+    })
+    return id
+  }
+
+  caf = function(handle) {
+    for(var i = 0; i < queue.length; i++) {
+      if(queue[i].handle === handle) {
+        queue[i].cancelled = true
+      }
+    }
+  }
+}
+
+module.exports = function(fn) {
+  // Wrap in a new function to prevent
+  // `cancel` potentially being assigned
+  // to the native rAF function
+  return raf.call(global, fn)
+}
+module.exports.cancel = function() {
+  caf.apply(global, arguments)
+}
+
+},{"performance-now":"/projects/demoscene/spins/node_modules/raf-loop/node_modules/raf/node_modules/performance-now/lib/performance-now.js"}],"/projects/demoscene/spins/node_modules/raf-loop/node_modules/raf/node_modules/performance-now/lib/performance-now.js":[function(require,module,exports){
+(function (process){
+// Generated by CoffeeScript 1.7.1
+(function() {
+  var getNanoSeconds, hrtime, loadTime;
+
+  if ((typeof performance !== "undefined" && performance !== null) && performance.now) {
+    module.exports = function() {
+      return performance.now();
+    };
+  } else if ((typeof process !== "undefined" && process !== null) && process.hrtime) {
+    module.exports = function() {
+      return (getNanoSeconds() - loadTime) / 1e6;
+    };
+    hrtime = process.hrtime;
+    getNanoSeconds = function() {
+      var hr;
+      hr = hrtime();
+      return hr[0] * 1e9 + hr[1];
+    };
+    loadTime = getNanoSeconds();
+  } else if (Date.now) {
+    module.exports = function() {
+      return Date.now() - loadTime;
+    };
+    loadTime = Date.now();
+  } else {
+    module.exports = function() {
+      return new Date().getTime() - loadTime;
+    };
+    loadTime = new Date().getTime();
+  }
+
+}).call(this);
+
+}).call(this,require('_process'))
+},{"_process":"/projects/demoscene/spins/node_modules/browserify/node_modules/process/browser.js"}],"/projects/demoscene/spins/node_modules/raf-loop/node_modules/right-now/browser.js":[function(require,module,exports){
+(function (global){
+module.exports =
+  global.performance &&
+  global.performance.now ? function now() {
+    return performance.now()
+  } : Date.now || function now() {
+    return +new Date
+  }
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{}],"/projects/demoscene/spins/node_modules/url-join/lib/url-join.js":[function(require,module,exports){
+function normalize (str) {
+  return str
+          .replace(/[\/]+/g, '/')
+          .replace(/\/\?/g, '?')
+          .replace(/\/\#/g, '#')
+          .replace(/\:\//g, '://');
+}
+
+module.exports = function () {
+  var joined = [].slice.call(arguments, 0).join('/');
+  return normalize(joined);
+};
+},{}],"/projects/demoscene/spins/node_modules/web-audio-analyser/index.js":[function(require,module,exports){
+var AudioContext = window.AudioContext || window.webkitAudioContext
+
+module.exports = WebAudioAnalyser
+
+function WebAudioAnalyser(audio, ctx, opts) {
+  if (!(this instanceof WebAudioAnalyser)) return new WebAudioAnalyser(audio, ctx, opts)
+  if (!(ctx instanceof AudioContext)) (opts = ctx), (ctx = null)
+
+  opts = opts || {}
+  this.ctx = ctx = ctx || new AudioContext
+
+  if (!(audio instanceof AudioNode)) {
+    audio = audio instanceof Audio
+      ? ctx.createMediaElementSource(audio)
+      : ctx.createMediaStreamSource(audio)
+  }
+
+  this.analyser = ctx.createAnalyser()
+  this.stereo   = !!opts.stereo
+  this.audible  = opts.audible !== false
+  this.wavedata = null
+  this.freqdata = null
+  this.splitter = null
+  this.merger   = null
+  this.source   = audio
+  
+  if (!this.stereo) {
+    this.output = this.source
+    this.source.connect(this.analyser)
+    if (this.audible)
+      this.analyser.connect(ctx.destination)
+  } else {
+    this.analyser = [this.analyser]
+    this.analyser.push(ctx.createAnalyser())
+
+    this.splitter = ctx.createChannelSplitter(2)
+    this.merger   = ctx.createChannelMerger(2)
+    this.output   = this.merger
+
+    this.source.connect(this.splitter)
+
+    for (var i = 0; i < 2; i++) {
+      this.splitter.connect(this.analyser[i], i, 0)
+      this.analyser[i].connect(this.merger, 0, i)
+    }
+
+    if (this.audible)
+      this.merger.connect(ctx.destination)
+  }
+}
+
+WebAudioAnalyser.prototype.waveform = function(output, channel) {
+  if (!output) output = this.wavedata || (
+    this.wavedata = new Uint8Array((this.analyser[0] || this.analyser).frequencyBinCount)
+  )
+
+  var analyser = this.stereo
+    ? this.analyser[channel || 0]
+    : this.analyser
+
+  analyser.getByteTimeDomainData(output)
+
+  return output
+}
+
+WebAudioAnalyser.prototype.frequencies = function(output, channel) {
+  if (!output) output = this.freqdata || (
+    this.freqdata = new Uint8Array((this.analyser[0] || this.analyser).frequencyBinCount)
+  )
+
+  var analyser = this.stereo
+    ? this.analyser[channel || 0]
+    : this.analyser
+
+  analyser.getByteFrequencyData(output)
+
+  return output
+}
+
+},{}],"/projects/demoscene/spins/presets.js":[function(require,module,exports){
+'use strict';
+
+module.exports = [{
+  capacity: 1000,
+  distance: 0.2,
+  alpha: 0.05,
+  seek: 0,
+  extent: 1.0,
+  position: [0, -3.5, 0],
+  url: 'https://soundcloud.com/max-richter/5-sarajevo'
+}, {
+  capacity: 1000,
+  seek: 0,
+  distance: 0.2,
+  alpha: 0.35,
+  extent: 0.5,
+  position: [0, -3.5, 0],
+  url: 'https://soundcloud.com/max-richter/5-sarajevo'
+}, {
+  capacity: 900,
+  distance: 0.35,
+  alpha: 0.1,
+  extent: 0.65,
+  seek: 60,
+  position: [0, -3.5, 0],
+  url: 'https://soundcloud.com/erasedtapes/rival-consoles-recovery'
+}, {
+  capacity: 1000,
+  distance: 0.2,
+  alpha: 0.15,
+  extent: 0.25,
+  position: [0, 3.5, 0],
+  url: 'https://soundcloud.com/futureclassic/hayden-james-something-about-you-2'
+}, {
+  capacity: 500,
+  distance: 0.01,
+  extent: 0.2,
+  alpha: 0.7,
+  position: [0, 3.5, 0],
+  url: 'https://soundcloud.com/futureclassic/hayden-james-something-about-you-2'
+}];
+
+},{}],"/projects/oss/soundcloud-badge/index.js":[function(require,module,exports){
+'use strict';
+
+var resolve = require('soundcloud-resolve');
+var fonts = require('google-fonts');
+var minstache = require('minstache');
+var insert = require('insert-css');
+var fs = require('fs');
+
+var icons = {
+  black: 'http://developers.soundcloud.com/assets/logo_black.png',
+  white: 'http://developers.soundcloud.com/assets/logo_white.png'
+};
+
+module.exports = badge;
+function noop(err) {
+  if (err) throw err;
+}
+
+var inserted = false;
+var gwfadded = false;
+var template = null;
+
+function badge(options, callback) {
+  if (!inserted) insert(".npm-scb-wrap {\n  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  font-weight: 200;\n  position: absolute;\n  top: 0;\n  left: 0;\n  z-index: 999;\n}\n\n.npm-scb-wrap a {\n  text-decoration: none;\n  color: #000;\n}\n.npm-scb-white\n.npm-scb-wrap a {\n  color: #fff;\n}\n\n.npm-scb-inner {\n  position: absolute;\n  top: -120px; left: 0;\n  padding: 8px;\n  width: 100%;\n  height: 150px;\n  z-index: 2;\n  -webkit-transition: width 0.5s cubic-bezier(1, 0, 0, 1), top 0.5s;\n     -moz-transition: width 0.5s cubic-bezier(1, 0, 0, 1), top 0.5s;\n      -ms-transition: width 0.5s cubic-bezier(1, 0, 0, 1), top 0.5s;\n       -o-transition: width 0.5s cubic-bezier(1, 0, 0, 1), top 0.5s;\n          transition: width 0.5s cubic-bezier(1, 0, 0, 1), top 0.5s;\n}\n.npm-scb-wrap:hover\n.npm-scb-inner {\n  top: 0;\n}\n\n.npm-scb-artwork {\n  position: absolute;\n  top: 16px; left: 16px;\n  width: 104px; height: 104px;\n  box-shadow: 0 0 8px -3px #000;\n  outline: 1px solid rgba(0,0,0,0.1);\n  z-index: 2;\n}\n.npm-scb-white\n.npm-scb-artwork {\n  outline: 1px solid rgba(255,255,255,0.1);\n  box-shadow: 0 0 10px -2px rgba(255,255,255,0.9);\n}\n\n.npm-scb-info {\n  position: absolute;\n  top: 16px;\n  left: 120px;\n  width: 300px;\n  z-index: 1;\n}\n\n.npm-scb-info > a {\n  display: block;\n}\n\n.npm-scb-now-playing {\n  font-size: 12px;\n  line-height: 12px;\n  position: absolute;\n  width: 500px;\n  z-index: 1;\n  padding: 15px 0;\n  top: 0; left: 138px;\n  opacity: 1;\n  -webkit-transition: opacity 0.25s;\n     -moz-transition: opacity 0.25s;\n      -ms-transition: opacity 0.25s;\n       -o-transition: opacity 0.25s;\n          transition: opacity 0.25s;\n}\n\n.npm-scb-wrap:hover\n.npm-scb-now-playing {\n  opacity: 0;\n}\n\n.npm-scb-white\n.npm-scb-now-playing {\n  color: #fff;\n}\n.npm-scb-now-playing > a {\n  font-weight: bold;\n}\n\n.npm-scb-info > a > p {\n  margin: 0;\n  padding-bottom: 0.25em;\n  line-height: 1.35em;\n  margin-left: 1em;\n  font-size: 1em;\n}\n\n.npm-scb-title {\n  font-weight: bold;\n}\n\n.npm-scb-icon {\n  position: absolute;\n  top: 120px;\n  padding-top: 0.75em;\n  left: 16px;\n}\n"), inserted = true;
+  if (!template) template = minstache.compile("<div class=\"npm-scb-wrap\">\n  <div class=\"npm-scb-inner\">\n    <a target=\"_blank\" href=\"{{urls.song}}\">\n      <img class=\"npm-scb-icon\" src=\"{{icon}}\">\n      <img class=\"npm-scb-artwork\" src=\"{{artwork}}\">\n    </a>\n    <div class=\"npm-scb-info\">\n      <a target=\"_blank\" href=\"{{urls.song}}\">\n        <p class=\"npm-scb-title\">{{title}}</p>\n      </a>\n      <a target=\"_blank\" href=\"{{urls.artist}}\">\n        <p class=\"npm-scb-artist\">{{artist}}</p>\n      </a>\n    </div>\n  </div>\n  <div class=\"npm-scb-now-playing\">\n    Now Playing:\n    <a href=\"{{urls.song}}\">{{title}}</a>\n    by\n    <a href=\"{{urls.artist}}\">{{artist}}</a>\n  </div>\n</div>\n");
+
+  if (!gwfadded && options.getFonts) {
+    fonts.add({ 'Open Sans': [300, 600] });
+    gwfadded = true;
+  }
+
+  options = options || {};
+  callback = callback || noop;
+
+  var div = options.el || document.createElement('div');
+  var icon = !('dark' in options) || options.dark ? 'black' : 'white';
+  var id = options.client_id;
+  var song = options.song;
+
+  resolve(id, song, function (err, json) {
+    if (err) return callback(err);
+    if (json.kind !== 'track') throw new Error('soundcloud-badge only supports individual tracks at the moment');
+
+    div.classList[icon === 'black' ? 'remove' : 'add']('npm-scb-white');
+
+    div.innerHTML = template({
+      artwork: json.artwork_url || json.user.avatar_url,
+      artist: json.user.username,
+      title: json.title,
+      icon: icons[icon],
+      urls: {
+        song: json.permalink_url,
+        artist: json.user.permalink_url
+      }
+    });
+
+    document.body.appendChild(div);
+
+    callback(null, json.stream_url + '?client_id=' + id, json, div);
+  });
+
+  return div;
+}
+
+},{"fs":"/projects/demoscene/spins/node_modules/browserify/lib/_empty.js","google-fonts":"/projects/oss/soundcloud-badge/node_modules/google-fonts/index.js","insert-css":"/projects/oss/soundcloud-badge/node_modules/insert-css/index.js","minstache":"/projects/oss/soundcloud-badge/node_modules/minstache/index.js","soundcloud-resolve":"/projects/oss/soundcloud-badge/node_modules/soundcloud-resolve/browser.js"}],"/projects/oss/soundcloud-badge/node_modules/google-fonts/index.js":[function(require,module,exports){
+module.exports = asString
+module.exports.add = append
+
+function asString(fonts) {
+  var href = getHref(fonts)
+  return '<link href="' + href + '" rel="stylesheet" type="text/css">'
+}
+
+function asElement(fonts) {
+  var href = getHref(fonts)
+  var link = document.createElement('link')
+  link.setAttribute('href', href)
+  link.setAttribute('rel', 'stylesheet')
+  link.setAttribute('type', 'text/css')
+  return link
+}
+
+function getHref(fonts) {
+  var family = Object.keys(fonts).map(function(name) {
+    var details = fonts[name]
+    name = name.replace(/\s+/, '+')
+    return typeof details === 'boolean'
+      ? name
+      : name + ':' + makeArray(details).join(',')
+  }).join('|')
+
+  return 'http://fonts.googleapis.com/css?family=' + family
+}
+
+function append(fonts) {
+  var link = asElement(fonts)
+  document.head.appendChild(link)
+  return link
+}
+
+function makeArray(arr) {
+  return Array.isArray(arr) ? arr : [arr]
+}
+
+},{}],"/projects/oss/soundcloud-badge/node_modules/insert-css/index.js":[function(require,module,exports){
+var inserted = [];
+
+module.exports = function (css) {
+    if (inserted.indexOf(css) >= 0) return;
+    inserted.push(css);
+    
+    var elem = document.createElement('style');
+    var text = document.createTextNode(css);
+    elem.appendChild(text);
+    
+    if (document.head.childNodes.length) {
+        document.head.insertBefore(elem, document.head.childNodes[0]);
+    }
+    else {
+        document.head.appendChild(elem);
+    }
+};
+
+},{}],"/projects/oss/soundcloud-badge/node_modules/minstache/index.js":[function(require,module,exports){
+
+/**
+ * Expose `render()`.`
+ */
+
+exports = module.exports = render;
+
+/**
+ * Expose `compile()`.
+ */
+
+exports.compile = compile;
+
+/**
+ * Render the given mustache `str` with `obj`.
+ *
+ * @param {String} str
+ * @param {Object} obj
+ * @return {String}
+ * @api public
+ */
+
+function render(str, obj) {
+  obj = obj || {};
+  var fn = compile(str);
+  return fn(obj);
+}
+
+/**
+ * Compile the given `str` to a `Function`.
+ *
+ * @param {String} str
+ * @return {Function}
+ * @api public
+ */
+
+function compile(str) {
+  var js = [];
+  var toks = parse(str);
+  var tok;
+
+  for (var i = 0; i < toks.length; ++i) {
+    tok = toks[i];
+    if (i % 2 == 0) {
+      js.push('"' + tok.replace(/"/g, '\\"') + '"');
+    } else {
+      switch (tok[0]) {
+        case '/':
+          tok = tok.slice(1);
+          js.push(') + ');
+          break;
+        case '^':
+          tok = tok.slice(1);
+          assertProperty(tok);
+          js.push(' + section(obj, "' + tok + '", true, ');
+          break;
+        case '#':
+          tok = tok.slice(1);
+          assertProperty(tok);
+          js.push(' + section(obj, "' + tok + '", false, ');
+          break;
+        case '!':
+          tok = tok.slice(1);
+          assertProperty(tok);
+          js.push(' + obj.' + tok + ' + ');
+          break;
+        default:
+          assertProperty(tok);
+          js.push(' + escape(obj.' + tok + ') + ');
+      }
+    }
+  }
+
+  js = '\n'
+    + indent(escape.toString()) + ';\n\n'
+    + indent(section.toString()) + ';\n\n'
+    + '  return ' + js.join('').replace(/\n/g, '\\n');
+
+  return new Function('obj', js);
+}
+
+/**
+ * Assert that `prop` is a valid property.
+ *
+ * @param {String} prop
+ * @api private
+ */
+
+function assertProperty(prop) {
+  if (!prop.match(/^[\w.]+$/)) throw new Error('invalid property "' + prop + '"');
+}
+
+/**
+ * Parse `str`.
+ *
+ * @param {String} str
+ * @return {Array}
+ * @api private
+ */
+
+function parse(str) {
+  return str.split(/\{\{|\}\}/);
+}
+
+/**
+ * Indent `str`.
+ *
+ * @param {String} str
+ * @return {String}
+ * @api private
+ */
+
+function indent(str) {
+  return str.replace(/^/gm, '  ');
+}
+
+/**
+ * Section handler.
+ *
+ * @param {Object} context obj
+ * @param {String} prop
+ * @param {String} str
+ * @param {Boolean} negate
+ * @api private
+ */
+
+function section(obj, prop, negate, str) {
+  var val = obj[prop];
+  if ('function' == typeof val) return val.call(obj, str);
+  if (negate) val = !val;
+  if (val) return str;
+  return '';
+}
+
+/**
+ * Escape the given `html`.
+ *
+ * @param {String} html
+ * @return {String}
+ * @api private
+ */
+
+function escape(html) {
+  return String(html)
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+},{}],"/projects/oss/soundcloud-badge/node_modules/soundcloud-resolve/browser.js":[function(require,module,exports){
+var qs  = require('querystring')
+var xhr = require('xhr')
+
+module.exports = resolve
+
+function resolve(id, goal, callback) {
+  var uri = 'http://api.soundcloud.com/resolve.json?' + qs.stringify({
+      url: goal
+    , client_id: id
+  })
+
+  xhr({
+      uri: uri
+    , method: 'GET'
+  }, function(err, res, body) {
+    if (err) return callback(err)
+    try {
+      body = JSON.parse(body)
+    } catch(e) {
+      return callback(e)
+    }
+    if (body.errors) return callback(new Error(
+      body.errors[0].error_message
+    ))
+    return callback(null, body)
+  })
+}
+
+},{"querystring":"/projects/demoscene/spins/node_modules/browserify/node_modules/querystring-es3/index.js","xhr":"/projects/oss/soundcloud-badge/node_modules/soundcloud-resolve/node_modules/xhr/index.js"}],"/projects/oss/soundcloud-badge/node_modules/soundcloud-resolve/node_modules/xhr/index.js":[function(require,module,exports){
+var window = require("global/window")
+var once = require("once")
+
+var messages = {
+    "0": "Internal XMLHttpRequest Error",
+    "4": "4xx Client Error",
+    "5": "5xx Server Error"
+}
+
+var XHR = window.XMLHttpRequest || noop
+var XDR = "withCredentials" in (new XHR()) ?
+        window.XMLHttpRequest : window.XDomainRequest
+
+module.exports = createXHR
+
+function createXHR(options, callback) {
+    if (typeof options === "string") {
+        options = { uri: options }
+    }
+
+    options = options || {}
+    callback = once(callback)
+
+    var xhr
+
+    if (options.cors) {
+        xhr = new XDR()
+    } else {
+        xhr = new XHR()
+    }
+
+    var uri = xhr.url = options.uri
+    var method = xhr.method = options.method || "GET"
+    var body = options.body || options.data
+    var headers = xhr.headers = options.headers || {}
+    var isJson = false
+
+    if ("json" in options) {
+        isJson = true
+        headers["Content-Type"] = "application/json"
+        body = JSON.stringify(options.json)
+    }
+
+    xhr.onreadystatechange = readystatechange
+    xhr.onload = load
+    xhr.onerror = error
+    // IE9 must have onprogress be set to a unique function.
+    xhr.onprogress = function () {
+        // IE must die
+    }
+    // hate IE
+    xhr.ontimeout = noop
+    xhr.open(method, uri)
+    if (options.cors) {
+        xhr.withCredentials = true
+    }
+    xhr.timeout = "timeout" in options ? options.timeout : 5000
+
+    if ( xhr.setRequestHeader) {
+        Object.keys(headers).forEach(function (key) {
+            xhr.setRequestHeader(key, headers[key])
+        })
+    }
+
+    xhr.send(body)
+
+    return xhr
+
+    function readystatechange() {
+        if (xhr.readyState === 4) {
+            load()
+        }
+    }
+
+    function load() {
+        var error = null
+        var status = xhr.statusCode = xhr.status
+        var body = xhr.body = xhr.response ||
+            xhr.responseText || xhr.responseXML
+
+        if (status === 0 || (status >= 400 && status < 600)) {
+            var message = xhr.responseText ||
+                messages[String(xhr.status).charAt(0)]
+            error = new Error(message)
+
+            error.statusCode = xhr.status
+        }
+
+        if (isJson) {
+            try {
+                body = xhr.body = JSON.parse(body)
+            } catch (e) {}
+        }
+
+        callback(error, xhr, body)
+    }
+
+    function error(evt) {
+        callback(evt, xhr)
+    }
+}
+
+
+function noop() {}
+
+},{"global/window":"/projects/oss/soundcloud-badge/node_modules/soundcloud-resolve/node_modules/xhr/node_modules/global/window.js","once":"/projects/oss/soundcloud-badge/node_modules/soundcloud-resolve/node_modules/xhr/node_modules/once/once.js"}],"/projects/oss/soundcloud-badge/node_modules/soundcloud-resolve/node_modules/xhr/node_modules/global/window.js":[function(require,module,exports){
+(function (global){
+if (typeof window !== "undefined") {
+    module.exports = window
+} else if (typeof global !== "undefined") {
+    module.exports = global
+} else {
+    module.exports = {}
+}
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{}],"/projects/oss/soundcloud-badge/node_modules/soundcloud-resolve/node_modules/xhr/node_modules/once/once.js":[function(require,module,exports){
+module.exports = once
+
+once.proto = once(function () {
+  Object.defineProperty(Function.prototype, 'once', {
+    value: function () {
+      return once(this)
+    },
+    configurable: true
+  })
+})
+
+function once (fn) {
+  var called = false
+  return function () {
+    if (called) return
+    called = true
+    return fn.apply(this, arguments)
+  }
+}
+
+},{}]},{},["/projects/demoscene/spins/index.js"]);

@@ -6,24 +6,31 @@ const lerp = require('lerp')
 const once = require('once')
 const defined = require('defined')
 const fit = require('canvas-fit')
-const queryString = require('query-string')
+const queryString = require('querystring')
 const soundcloud = require('soundcloud-badge')
 const urlJoin = require('url-join')
 const presets = require('./presets')
+const showError = require('./lib/error')
 
 const AudioContext = window.AudioContext || window.webkitAudioContext
-const audioContext = new AudioContext()
+const audioContext = AudioContext ? new AudioContext() : null
 const context = getContext('2d')
 const canvas = context.canvas
 document.body.appendChild(canvas)
 document.body.style.overflow = 'hidden'
 
+const errMessage = 'Sorry, this demo only works in Chrome and FireFox!'
 const loop = createLoop()
 let oldDiv, oldAudio
-loadTrack()
-printOptions()
 
-global.load = loadTrack
+if (!AudioContext) {
+  showError(errMessage)
+} else {
+  global.load = loadTrack
+  loadTrack()
+  printOptions()
+}
+  
 function loadTrack (opt) {
   if (oldAudio) oldAudio.pause()
   if (oldDiv) oldDiv.parentNode.removeChild(oldDiv)
@@ -43,7 +50,9 @@ function loadTrack (opt) {
     dark: true,
     getFonts: true
   }, (err, src, json, div) => {
-    if (err) throw err
+    if (err) {
+      showError(errMessage)
+    }
     oldDiv = div
     startAudio(src, opt)
   })
