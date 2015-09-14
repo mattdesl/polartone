@@ -145,7 +145,7 @@ function renderTrack (audio, opt) {
 }
 
 function printOptions () {
-  console.log(`%censō-audio`, `font-weight: bold; padding: 3px; background: #ededed;`)
+  console.log(`%cspins`, `font-weight: bold; padding: 3px; background: #ededed;`)
   console.log(`To change tracks and settings:
 
   load()    // loads a random track
