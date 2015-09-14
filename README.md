@@ -1,12 +1,31 @@
 # spins
 
-[![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
+Experimental audio visualizer using HTML5 and Canvas2D.
 
-Audio visualizer using HTML5 and Canvas2D.
+#### live demo
 
-## Usage
+http://mattdesl.github.io/spins/
 
-[![NPM](https://nodei.co/npm/spins.png)](https://www.npmjs.com/package/spins)
+#### screenshots
+
+<img src="http://i.imgur.com/ErtIEYn.png" width="49%" />
+<img src="http://i.imgur.com/XY4MQnH.png" width="49%" />
+
+#### running from source
+
+```sh
+git clone https://github.com/mattdesl/spins.git
+cd spins
+npm install
+
+# start localhost:9966
+npm run start
+
+# or run build process
+npm run build
+```
+
+Tested on node 0.12.7 and npm 2.1.8.
 
 ## License
 

@@ -6,9 +6,10 @@ const lerp = require('lerp')
 const once = require('once')
 const defined = require('defined')
 const fit = require('canvas-fit')
-
-const presets = require('./presets')
+const queryString = require('query-string')
 const soundcloud = require('soundcloud-badge')
+const urlJoin = require('url-join')
+const presets = require('./presets')
 
 const AudioContext = window.AudioContext || window.webkitAudioContext
 const audioContext = new AudioContext()
@@ -35,9 +36,10 @@ function loadTrack (opt) {
     opt = { url: opt }
   }
 
+  var queryUrl = getQueryTrack()
   soundcloud({
     client_id: 'b95f61a90da961736c03f659c03cb0cc',
-    song: opt.url,
+    song: getTrackUrl(queryUrl || opt.url),
     dark: true,
     getFonts: true
   }, (err, src, json, div) => {
@@ -50,8 +52,6 @@ function loadTrack (opt) {
 function startAudio (src, opt) {
   const audio = new Audio()
   audio.crossOrigin = 'Anonymous'
-  audio.loop = true
-  // audio.setAttribute('muted', '')
   audio.addEventListener('canplay', once(() => {
     if (opt.seek) audio.currentTime = opt.seek
     renderTrack(audio, opt)
@@ -164,4 +164,16 @@ To change tracks and settings:
     alpha      line opacity
     seek       seconds to jump into the song at
 `)
+}
+
+function getQueryTrack () {
+  return queryString.parse(window.location.search).url
+}
+
+function getTrackUrl (url) {
+  if (!url) return null
+  if (!/https?:/i.test(url)) {
+    url = urlJoin('https://soundcloud.com/', url)
+  }
+  return url
 }
