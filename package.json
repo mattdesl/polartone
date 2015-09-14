@@ -1,5 +1,5 @@
 {
-  "name": "vinylize",
+  "name": "spins",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -42,10 +42,10 @@
   "keywords": [],
   "repository": {
     "type": "git",
-    "url": "git://github.com/mattdesl/vinylize.git"
+    "url": "git://github.com/mattdesl/spins.git"
   },
-  "homepage": "https://github.com/mattdesl/vinylize",
+  "homepage": "https://github.com/mattdesl/spins",
   "bugs": {
-    "url": "https://github.com/mattdesl/vinylize/issues"
+    "url": "https://github.com/mattdesl/spins/issues"
   }
 }
