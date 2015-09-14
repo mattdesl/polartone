@@ -180,7 +180,9 @@ You can also specify a short URL in the query and it will take precedence.
 }
 
 function getQueryTrack () {
-  return queryString.parse(window.location.search).url
+  var search = window.location.search
+  if (search) search = search.trim().replace(/^(\?|#|&)/, '')
+  return queryString.parse(search).url
 }
 
 function getTrackUrl (url) {
