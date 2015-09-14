@@ -108,9 +108,9 @@ function renderTrack (audio, opt) {
     context.scale(dpr, dpr)
 
     // for a motion trail effect
-    // const [width, height] = shape
-    // context.fillStyle = 'rgba(255,255,255,0.0001)'
-    // context.fillRect(0, 0, width, height)
+    const [width, height] = shape
+    context.fillStyle = 'rgba(255,255,255,0.001)'
+    context.fillRect(0, 0, width, height)
 
     let radius = 1 - dur
     const startAngle = time
