@@ -163,6 +163,10 @@ To change tracks and settings:
     extent     amount to extend away from line center
     alpha      line opacity
     seek       seconds to jump into the song at
+
+
+You can also specify a short URL in the query and it will take precedence.
+  http://mattdesl.github.io/spins?url=roman-mars/99-invisible-162-mystery-house
 `)
 }
 
