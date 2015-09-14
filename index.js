@@ -108,9 +108,9 @@ function renderTrack (audio, opt) {
     context.scale(dpr, dpr)
 
     // for a motion trail effect
-    const [width, height] = shape
-    context.fillStyle = 'rgba(255,255,255,0.001)'
-    context.fillRect(0, 0, width, height)
+    // const [width, height] = shape
+    // context.fillStyle = 'rgba(255,255,255,0.001)'
+    // context.fillRect(0, 0, width, height)
 
     let radius = 1 - dur
     const startAngle = time
@@ -147,7 +147,9 @@ function renderTrack (audio, opt) {
 
 function printOptions () {
   console.log(`%cspins`, `font-weight: bold; padding: 3px; background: #ededed;`)
-  console.log(`To change tracks and settings:
+  console.log(`Reload the page for another preset.
+    
+To change tracks and settings:
 
   load()    // loads a random track
   load(url) // loads a SoundCloud url
@@ -160,5 +162,6 @@ function printOptions () {
     position   camera [x, y, z]
     extent     amount to extend away from line center
     alpha      line opacity
+    seek       seconds to jump into the song at
 `)
 }
