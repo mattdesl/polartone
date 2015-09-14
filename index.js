@@ -6,11 +6,12 @@ const lerp = require('lerp')
 const once = require('once')
 const defined = require('defined')
 const fit = require('canvas-fit')
-const queryString = require('querystring')
+const queryString = require('query-string')
 const soundcloud = require('soundcloud-badge')
 const urlJoin = require('url-join')
 const presets = require('./presets')
 const showError = require('./lib/error')
+const assign = require('object-assign')
 
 const AudioContext = window.AudioContext || window.webkitAudioContext
 const audioContext = AudioContext ? new AudioContext() : null
@@ -43,10 +44,22 @@ function loadTrack (opt) {
     opt = { url: opt }
   }
 
-  var queryUrl = getQueryTrack()
+  opt = assign({}, opt)  
+  
+  // mixin query parameters
+  var query = getQueryParams()
+  opt.url = query.url || opt.url
+  
+  var numbers = ['distance', 'capacity', 'alpha', 'seek', 'extent']
+  numbers.forEach(function (key) {
+      if (typeof query[key] !== 'undefined') {
+        opt[key] = parseFloat(query[key])
+      }
+    })
+    
   soundcloud({
     client_id: 'b95f61a90da961736c03f659c03cb0cc',
-    song: getTrackUrl(queryUrl || opt.url),
+    song: getTrackUrl(opt.url),
     dark: true,
     getFonts: true
   }, (err, src, json, div) => {
@@ -179,10 +192,8 @@ You can also specify a short URL in the query and it will take precedence.
 `)
 }
 
-function getQueryTrack () {
-  var search = window.location.search
-  if (search) search = search.trim().replace(/^(\?|#|&)/, '')
-  return queryString.parse(search).url
+function getQueryParams () {
+  return queryString.parse(window.location.search)
 }
 
 function getTrackUrl (url) {

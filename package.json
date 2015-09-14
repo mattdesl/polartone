@@ -20,6 +20,7 @@
     "object-assign": "^4.0.1",
     "once": "^1.3.2",
     "perspective-camera": "^2.0.0",
+    "query-string": "^2.4.1",
     "querystring": "^0.2.0",
     "raf-loop": "^1.1.3",
     "soundcloud-badge": "mattdesl/soundcloud-badge#feature/next",
