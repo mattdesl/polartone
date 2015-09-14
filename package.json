@@ -37,7 +37,7 @@
   },
   "scripts": {
     "start": "budo index.js:bundle.js --live -- -t babelify -t [ installify --save ] | garnish",
-    "build": "browserify index.js | uglifyjs -cm > bundle.js"
+    "build": "browserify index.js -t babelify | uglifyjs -cm > bundle.js"
   },
   "keywords": [],
   "repository": {
