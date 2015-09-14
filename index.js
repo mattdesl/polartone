@@ -44,6 +44,7 @@ function loadTrack (opt) {
     opt = { url: opt }
   }
 
+  // don't mutate options
   opt = assign({}, opt)  
   
   // mixin query parameters
