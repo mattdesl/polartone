@@ -3,6 +3,7 @@ const createCamera = require('perspective-camera')
 const createLoop = require('raf-loop')
 const getContext = require('get-canvas-context')
 const lerp = require('lerp')
+const once = require('once')
 const defined = require('defined')
 const fit = require('canvas-fit')
 
@@ -51,11 +52,11 @@ function startAudio (src, opt) {
   audio.crossOrigin = 'Anonymous'
   audio.loop = true
   // audio.setAttribute('muted', '')
-  audio.addEventListener('canplay', () => {
+  audio.addEventListener('canplay', once(() => {
     if (opt.seek) audio.currentTime = opt.seek
     renderTrack(audio, opt)
     audio.play()
-  })
+  }))
   audio.src = src
   oldAudio = audio
 }
@@ -115,7 +116,7 @@ function renderTrack (audio, opt) {
     const startAngle = time
     const alpha = opt.alpha || 0.25
     context.strokeStyle = 'rgba(0, 0, 0, ' + alpha + ')'
-    context.lineWidth = 0.1
+    context.lineWidth = 1
     context.lineJoin = 'round'
     context.beginPath()
     for (let i = positions.length - 1; i >= 0; i--) {
