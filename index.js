@@ -38,8 +38,12 @@ function loadTrack (opt) {
   loop.stop()
   loop.removeAllListeners('tick')
 
+  var query = getQueryParams()
   if (!opt) {
-    opt = presets[Math.floor(Math.random() * presets.length)]
+    var presetIndex = typeof query.preset !== 'undefined'
+      ? (parseInt(query.preset, 10) | 0)
+      : Math.floor(Math.random() * presets.length)
+    opt = presets[presetIndex % presets.length]
   } else if (typeof opt === 'string') {
     opt = { url: opt }
   }
@@ -48,12 +52,19 @@ function loadTrack (opt) {
   opt = assign({}, opt)  
   
   // mixin query parameters
-  var query = getQueryParams()
   opt.url = query.url || opt.url
   
-  var numbers = ['distance', 'capacity', 'alpha', 'seek', 'extent']
-  numbers.forEach(function (key) {
-      if (typeof query[key] !== 'undefined') {
+  var features = ['distance', 'capacity', 'alpha', 'seek',
+    'extent', 'position']
+  features.forEach(function (key) {
+      if (key === 'position' && typeof query.position === 'string') {
+        opt.position = query.position.split(',').map(function (n) {
+          return parseFloat(n) || 0
+        }).slice(0, 3)
+        if (opt.position.length !== 3) {
+          opt.position = null
+        }
+      } else if (typeof query[key] !== 'undefined') {
         opt[key] = parseFloat(query[key])
       }
     })

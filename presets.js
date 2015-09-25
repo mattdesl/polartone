@@ -41,5 +41,14 @@ module.exports = [
     alpha: 0.7,
     position: [0, 3.5, 0],
     url: 'https://soundcloud.com/futureclassic/hayden-james-something-about-you-2'
+  },
+  {
+    capacity: 1000,
+    distance: 0.09,
+    extent: 0.2,
+    alpha: 0.2,
+    seek: 0,
+    position: [0, 3.5, 0],
+    url: 'alpineband/gasoline-2'
   }
 ]
