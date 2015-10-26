@@ -2,3 +2,6 @@ bower_components
 node_modules
 *.log
 .DS_Store
+output/*.png
+output/
+audio/

@@ -1,17 +1,23 @@
-# spins
+# polartone 
 
-Experimental audio visualizer using HTML5 and Canvas2D.
+###### <sup>formerly *spins*</sup>
 
-#### live demo
+Audio visualizer, rendering waveforms in polar coordinates. Uses WebAudio and Canvas2D. Electron and [hihat](https://github.com/Jam3/hihat) is used to generate high-resolution prints, see below.
+
+## Online Demo
+
+The demo uses WebAudio, and only works in latest Chrome and FireFox.
 
 http://mattdesl.github.io/spins/
 
-#### screenshots
+## Screenshots
 
 <img src="http://i.imgur.com/ErtIEYn.png" width="49%" />
 <img src="http://i.imgur.com/XY4MQnH.png" width="49%" />
 
-#### running from source
+## Running from Source
+
+To run the web demo from source:
 
 ```sh
 git clone https://github.com/mattdesl/spins.git
@@ -26,6 +32,10 @@ npm run build
 ```
 
 Tested on node 0.12.7 and npm 2.1.8.
+
+## High-Resolution Prints
+
+To generate high-resolution prints, [hihat](https://github.com/Jam3/hihat) (Electron + Browserify + Node) is used to write the `<canvas>` element to disk.
 
 ## License
 
