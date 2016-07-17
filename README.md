@@ -8,7 +8,7 @@ Audio visualizer, rendering waveforms in polar coordinates. Uses WebAudio and Ca
 
 The demo uses WebAudio, and only works in latest Chrome and FireFox.
 
-http://mattdesl.github.io/spins/
+http://mattdesl.github.io/polartone/
 
 ## Screenshots
 
@@ -20,8 +20,8 @@ http://mattdesl.github.io/spins/
 To run the web demo from source:
 
 ```sh
-git clone https://github.com/mattdesl/spins.git
-cd spins
+git clone https://github.com/mattdesl/polartone.git
+cd polartone
 npm install
 
 # start localhost:9966
@@ -39,4 +39,4 @@ To generate high-resolution prints, [hihat](https://github.com/Jam3/hihat) (Elec
 
 ## License
 
-MIT, see [LICENSE.md](http://github.com/mattdesl/spins/blob/master/LICENSE.md) for details.
+MIT, see [LICENSE.md](http://github.com/mattdesl/polartone/blob/master/LICENSE.md) for details.

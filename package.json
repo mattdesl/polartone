@@ -1,5 +1,5 @@
 {
-  "name": "spins",
+  "name": "polartone",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -42,10 +42,10 @@
   "keywords": [],
   "repository": {
     "type": "git",
-    "url": "git://github.com/mattdesl/spins.git"
+    "url": "git://github.com/mattdesl/polartone.git"
   },
-  "homepage": "https://github.com/mattdesl/spins",
+  "homepage": "https://github.com/mattdesl/polartone",
   "bugs": {
-    "url": "https://github.com/mattdesl/spins/issues"
+    "url": "https://github.com/mattdesl/polartone/issues"
   }
 }
