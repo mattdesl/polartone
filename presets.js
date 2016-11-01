@@ -34,14 +34,14 @@ module.exports = [
     position: [0, 3.5, 0],
     url: 'https://soundcloud.com/kartell/sg-lewis-no-less-kartell-remix-1'
   },
-  {
-    capacity: 400,
-    distance: 0.2,
-    alpha: 0.25,
-    extent: 0.50,
-    position: [0, 3.5, 0],
-    url: 'https://soundcloud.com/maddecent/unlike-pluto-kickraux-palace-1'
-  },
+  // {
+  //   capacity: 400,
+  //   distance: 0.2,
+  //   alpha: 0.25,
+  //   extent: 0.50,
+  //   position: [0, 3.5, 0],
+  //   url: 'https://soundcloud.com/maddecent/unlike-pluto-kickraux-palace-1'
+  // },
   // {
   //   capacity: 500,
   //   distance: 0.01,
